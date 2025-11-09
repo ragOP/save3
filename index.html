@@ -1,96 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+  <title>Rate Cut Pros — Auto Insurance Savings</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Ringba (call tracking) -->
+  <script src="//b-js.ringba.com/CAfdb7eb5bdaa24fb8a155f293ece397ae" async></script>
+
+  <style>
+    :root{
+      --ink:#111418;
+      --muted:#6b7280;
+      --bg:#ffffff;            /* page edges */
+      --panel:#ffffff;         /* main white card */
+      --brand:#000000;         /* black header band */
+      --accent:#ffde6a;        /* gold band + button base */
+      --accent-strong:#f2cc3a; /* darker gold hover */
+      --cut:#ffd84d;           /* 'CUT' highlight */
+      --success:#18a957;
+      --radius-xl:24px;
+      --radius:16px;
+      --shadow:0 18px 40px rgba(0,0,0,.18);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at -10% 20%, #1f2432 0%, rgba(31,36,50,0) 60%),
+        radial-gradient(1200px 600px at 110% 80%, #1a1f2b 0%, rgba(26,31,43,0) 60%),
+        var(--bg);
+      min-height:100dvh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:16px;
+    }
+
+    /* Shell */
+    .phone-viewport{
+      width:100%;
+      max-width:420px; /* close to screenshot width */
+      background:var(--panel);
+      border-radius:var(--radius-xl);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    /* Header */
+    .brand-bar{
+      background:var(--brand);
+      color:#fff;
+      text-align:center;
+      padding:14px 18px 12px;
+      font-weight:800;
+      letter-spacing:.4px;
+      font-size:20px;
+    }
+    .brand-bar .word{opacity:.9}
+    .brand-bar .cut{color:var(--cut); margin:0 .2ch; opacity:1}
+
+    .gold-strip{
+      background:linear-gradient(180deg, #ffe890, var(--accent));
+      color:#1a1a1a;
+      text-align:center;
+      font-weight:700;
+      font-size:14px;
+      padding:10px 14px;
+      border-bottom:1px solid rgba(0,0,0,.08);
+    }
+
+    /* Content */
+    .content{
+      padding:22px 20px 26px;
+      background:#fff;
+    }
+
+    .headline{
+      font-size:28px;
+      line-height:1.24;
+      font-weight:800;
+      margin:10px 0 14px;
+      letter-spacing:-.2px;
+    }
+
+    .car-wrap{
+      display:flex;
+      justify-content:center;
+      margin:18px 0 10px;
+    }
+    .car-img{
+      display:block;
+      width:100%;
+      max-width:320px;
+      height:auto;
+      border-radius:8px;
+    }
+
+    .list{
+      margin:10px 0 18px;
+      padding:0 0 0 2px;
+      list-style:none;
+    }
+    .list li{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-size:18px;
+      line-height:1.45;
+      margin:10px 0;
+    }
+    .check{
+      flex:0 0 auto;
+      width:22px;height:22px;
+      display:inline-grid;place-items:center;
+      border-radius:999px;
+      background:#f2fbf5;
+      color:var(--success);
+      border:1px solid rgba(24,169,87,.25);
+      font-size:12px;
+      margin-top:1px;
+    }
+      .check2{
+     
+    
+    }
+
+    /* CTA */
+    .cta{
+      display:block;
+      width:100%;
+      text-decoration:none;
+      margin:18px 0 6px;
+      background:var(--accent);
+      color:#111;
+      border-radius:999px;
+      border:2px solid #111;
+      padding:18px 20px;
+      text-align:center;
+      font-weight:900;
+      font-size:20px;
+      box-shadow:0 8px 0 #111, 0 18px 40px rgba(0,0,0,.1);
+      transition:transform .06s ease, box-shadow .06s ease, background .2s ease;
+    }
+    .cta:hover{ background:var(--accent-strong); transform:translateY(1px); box-shadow:0 7px 0 #111, 0 16px 32px rgba(0,0,0,.12); }
+    .cta:active{ transform:translateY(2px); box-shadow:0 6px 0 #111, 0 12px 24px rgba(0,0,0,.14); }
+
+    .cta .ico{ margin-right:8px; }
+
+    .subcopy{
+      text-align:center;
+      color:#3b3b3b;
+      font-size:13px;
+      margin-top:12px;
+    }
+    .subcopy em{ font-weight:700 }
+
+    /* Footer shadow fade like screenshot */
+    .fade-bottom{
+      height:56px;
+      background:linear-gradient(0deg, rgba(0,0,0,.10), rgba(0,0,0,0));
+      border-radius:0 0 var(--radius-xl) var(--radius-xl);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width:380px){
+      .headline{ font-size:26px; }
+      .cta{ font-size:18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="phone-viewport" role="main">
+    <!-- Top brand -->
+    <div class="brand-bar" aria-label="Brand">
+      <span class="word">RATE</span>
+      <span class="cut">CUT</span>
+      <span class="word">PROS</span>
+    </div>
+
+    <!-- Gold strip -->
+    <div class="gold-strip">Stop Overpaying Today – Call Us Now!</div>
+
+    <!-- Content -->
+    <section class="content">
+      <h1 class="headline">
+        We make sure you pay a lot less for your current Auto Insurance Plan.
+      </h1>
+
+      <!-- Car illustration (replace src with your car image) -->
+      <div class="car-wrap">
+        <!-- Replace "car.png" with your provided image filename -->
+        <img src="mana.png" alt="Blue sedan illustration" class="car-img" />
+      </div>
+
+      <!-- Bullets -->
+      <ul class="list" aria-label="Key points">
+        <li>
+         
+      <span class="check" style="background:#fff7d6;color:var(--cut);border:1px solid rgba(0,0,0,.08);">
+     
+      ✔
+     
+      </span>
+  
+          <span><strong>100% Free Help.</strong></span>
+        </li>
+        <li>
+      <span style="
+  background:#fff7d6;
+  border:1px solid rgba(0,0,0,.08);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+">
+  <i class="fa-solid fa-check" style="color:#f6c700;font-size:12px;"></i>
+</span>
+
+          <span>Takes <strong>5–10 minutes.</strong></span>
+        </li>
+        <li>
+          <span class="check"><i class="fa-solid fa-check"></i></span>
+          <span>Tap below to <strong>CALL NOW!</strong></span>
+        </li>
+      </ul>
+
+      <!-- CTA (update number + tel:) -->
+      <a
+        href="tel:+18311231234"
+        class="cta"
+        aria-label="Call (831) 123-1234 now"
+        title="Call (831) 123-1234"
       >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+        CALL (831) 123-1234
+      </a>
+
+      <p class="subcopy">
+        We keep it simple, fast and to-the-point, <br />
+        <em>let us help you pay less!</em>
+      </p>
+    </section>
+
+    <!-- Bottom fade -->
+    <div class="fade-bottom" aria-hidden="true"></div>
+  </main>
+</body>
 </html>
