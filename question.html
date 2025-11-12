@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
+  <title>Save Max Auto — Auto Insurance Savings</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Ringba (call tracking) -->
+  <script
+    id="ringba-script"
+    src="//b-js.ringba.com/CAfdb7eb5bdaa24fb8a155f293ece397ae"
+    async
+    onload="window.__ringbaLoaded=true;console.log('[Ringba] script loaded')"
+    onerror="window.__ringbaBlocked=true;console.warn('[Ringba] script blocked/failed')"
+  ></script>
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQF5XNR');
+  </script>
+
+  <!-- TikTok Pixel -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+      ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],
+      ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat([].slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+      ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};
+      ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o[e]=n||{};
+        n=d.createElement("script");n.type="text/javascript";n.async=!0;n.src=r+"?sdkid="+e+"&lib="+t;
+        e=d.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)
+      };
+      ttq.load('CV0AU8BC77UBQA5N4G9G'); ttq.page();
+    }(window, document, 'ttq');
+  </script>
+
+  <!-- NewsBreak Pixel (init; we fire raw_call on CTA) -->
+  <script>
+    !(function (e, n, t, i, p, a, s) {
+      e[i] || (((p = e[i] = function () { p.process ? p.process.apply(p, arguments) : p.queue.push(arguments); }).queue = []),
+      (p.t = +new Date()),
+      ((a = n.createElement(t)).async = 1),
+      (a.src = 'https://static.newsbreak.com/business/tracking/nbpixel.js?t=' + 864e5 * Math.ceil(new Date() / 864e5)),
+      (s = n.getElementsByTagName(t)[0]).parentNode.insertBefore(a, s));
+    })(window, document, 'script', 'nbpix');
+    nbpix('init', 'ID-1969942605923770369');
+  </script>
+
+  <!-- Tracking helpers -->
+  <script>
+    // Ringba tag queue + helper
+    window._rgba_tags = window._rgba_tags || [];
+    const RINGBA_AGE_KEY = 'age';
+    function rbAge(value) {
+      try {
+        const tag = {}; tag[RINGBA_AGE_KEY] = value;
+        tag.newsbreak_cid = window.newsbreak_cid || '';
+        window._rgba_tags.push(tag);
+        console.log('[Ringba] pushed tag:', tag);
+      } catch (e) { console.warn('[Ringba] push failed', e); }
+    }
+
+    // NB toast chip (optional; enable #nb-chip in DOM to see it)
+    function showNbChip(text) {
+      var chip = document.getElementById('nb-chip');
+      if (!chip) return;
+      chip.textContent = text;
+      chip.style.display = 'inline-block';
+      clearTimeout(window.__nb_chip_to);
+      window.__nb_chip_to = setTimeout(function(){ chip.style.display='none'; }, 1800);
+    }
+
+    // Fire NewsBreak raw_call (non-blocking for tel:)
+    function fireNbRawCall() {
+      try {
+        if (typeof nbpix === 'function') {
+          nbpix('event', 'raw_call');
+          console.log('[NB Pixel] raw_call fired');
+        } else {
+          window.__nb_fallback_queue = window.__nb_fallback_queue || [];
+          window.__nb_fallback_queue.push(['event','raw_call']);
+          console.warn('[NB Pixel] queued raw_call; nbpix not ready');
+        }
+        showNbChip('NB: raw_call sent');
+      } catch(e){ console.warn('[NB Pixel] raw_call failed', e); }
+    }
+
+    // Flush queued NB events when ready
+    window.addEventListener('load', function(){
+      if (window.__nb_fallback_queue && typeof nbpix === 'function') {
+        window.__nb_fallback_queue.forEach(function(args){ try{ nbpix.apply(null,args);}catch(_){} });
+        window.__nb_fallback_queue.length = 0;
+      }
+    });
+
+    // Attach call tracking to CTA
+    window.addEventListener('DOMContentLoaded', function () {
+      const callButton = document.getElementById('callLink');
+      if (!callButton) return;
+      callButton.addEventListener('click', function () {
+        try { fireNbRawCall(); } catch (_) {}
+      }, { passive: true });
+    });
+  </script>
+
+  <style>
+    :root{
+      --ink:#0b1b33;
+      --muted:#6b7280;
+      --panel:#ffffff;
+      --blue:#244572;
+      --blue-br:#76CCF3;
+      --brand:#00C7FF;
+      --success:#18a957;
+      --warning:#ffde6a;
+      --shadow:0 22px 60px rgba(9,30,66,.18);
+      --radius:18px;
+      --radius-xl:24px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#fff;}
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      min-height:100dvh;
+      display:flex; align-items:flex-start; justify-content:center;
+    }
+    .phone-viewport{ width:100%; background:var(--panel); box-shadow:var(--shadow); overflow:hidden; }
+
+    /* Header */
+    .brand-bar{ background:#fff; text-align:center; padding:14px 18px 12px; }
+    .gold-strip{ background:var(--brand); color:#fff; text-align:center; font-weight:800; font-size:14px; padding:10px 14px; }
+
+    /* Stage views */
+    .stage{ width:100%; }
+    .view{ display:none; }
+    .view.show{ display:block; }
+
+    /* Content (quiz view) */
+    .content{ padding:22px 20px 26px; }
+    .headline{ font-size:28px; font-weight:900; margin:10px 0 14px; letter-spacing:-.2px; }
+    .car-wrap{ display:flex; justify-content:center; margin:18px 0 10px; }
+    .car-img{ display:block; width:100%; max-width:320px; height:auto; border-radius:10px; }
+    .list{ margin:10px 0 18px; padding:0; list-style:none; }
+    .list li{ display:flex; align-items:center; gap:10px; font-size:18px; margin:10px 0; }
+
+    .quiz-card{ margin-top:14px; border:1px solid rgba(0,0,0,.06); border-radius:16px; padding:16px; background:#fff; box-shadow:0 10px 24px rgba(0,0,0,.06); }
+    .quiz-title{ font-weight:900; font-size:18px; margin-bottom:8px; }
+    .quiz-sub{ color:#4b5563; font-size:14px; margin-bottom:14px; }
+    .options{ display:flex; flex-direction:column; gap:10px; }
+    .opt{ border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px; font-weight:800; cursor:pointer; text-align:center; background:#f9fafb; }
+    .opt:active{ transform:translateY(1px); }
+
+    /* CTA */
+    .cta{
+      display:block; width:100%; margin:18px 0 6px; text-decoration:none;
+      background:var(--blue); color:#fff; border-radius:999px; border:2px solid var(--blue-br);
+      padding:18px 20px; text-align:center; font-weight:900; font-size:28px; position:relative; overflow:hidden;
+      transition:transform .06s ease, background .2s ease;
+    }
+    .cta:hover{ background:#1d3a61; transform:translateY(1px); }
+    .cta:active{ transform:translateY(2px); }
+    .cta.shimmer::after{
+      content:""; position:absolute; top:0; left:-60%; width:40%; height:100%;
+      background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.7) 50%, rgba(255,255,255,0) 100%);
+      transform:skewX(-20deg); filter:blur(6px); opacity:.95; pointer-events:none; animation:shimmer 1.6s linear infinite;
+    }
+    @keyframes shimmer{ 0%{left:-60%} 100%{left:160%} }
+    .subcopy{ text-align:center; color:#3b3b3b; font-size:13px; margin-top:12px; }
+
+    /* Live bar */
+    #live-bar{ position:relative; bottom:20px; left:50%; transform:translateX(-50%); width:max-content; }
+    .live-pill{ display:inline-flex; align-items:center; gap:12px; background:linear-gradient(90deg,#fffbf5,#fff7f2); border:1px solid rgba(0,0,0,.06); padding:10px 16px; border-radius:999px; box-shadow:0 6px 18px rgba(12,24,40,.06); font-weight:700; color:#1f2937; }
+    .live-icon{ width:12px; height:12px; border-radius:50%; background:var(--brand); }
+
+    /* ===== LOADING VIEW (top) ===== */
+    .loading-view{ padding:36px 20px 40px; background:radial-gradient(1200px 600px at 50% -10%, #f0f7ff, #ffffff); border-top:1px solid rgba(0,0,0,.06); }
+    .loading-card{ margin:0 auto; max-width:680px; border:1px dashed #cbd5e1; border-radius:16px; padding:22px; background:#f9fbff; text-align:center; box-shadow:0 10px 24px rgba(0,0,0,.06); }
+    .spinner{ width:54px; height:54px; border-radius:50%; border:6px solid #e5f0ff; border-top-color:var(--brand); margin:6px auto 14px; animation: spin 1s linear infinite; }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loading-big{ font-size:20px; font-weight:900; color:#0b2d4d; }
+    .loading-sub{ color:#37526a; font-size:14px; margin-top:6px; }
+    .loading-steps{ margin-top:14px; color:#1f2937; font-weight:700; }
+    .loading-step-fade{ opacity:.4; transition:opacity .3s ease; }
+    .loading-step-active{ opacity:1; }
+
+    /* ===== BEAUTIFIED CONGRATS VIEW (top main) ===== */
+    .congrats-view{
+      padding:36px 20px 46px;
+      background:
+        radial-gradient(1400px 700px at 50% -10%, #f3f9ff, #ffffff),
+        linear-gradient(180deg, rgba(0,199,255,.08), transparent 30%);
+      border-top:1px solid rgba(0,0,0,.06);
+      position:relative;
+      overflow:hidden;
+    }
+    /* soft confetti corners */
+    .congrats-view::before,
+    .congrats-view::after{
+      content:""; position:absolute; width:240px; height:240px; border-radius:50%;
+      filter:blur(40px); opacity:.35; pointer-events:none;
+    }
+    .congrats-view::before{ top:-60px; left:-60px; background:radial-gradient(circle at center, #a5e3ff, transparent 60%); }
+    .congrats-view::after{ top:-50px; right:-50px; background:radial-gradient(circle at center, #b5f5d1, transparent 60%); }
+
+    .congrats-card{
+      margin:0 auto; max-width:820px;
+      border:1px solid rgba(0,0,0,.06); border-radius:22px; padding:22px 20px 24px;
+      background:linear-gradient(180deg, #f8fbff, #ffffff 50%);
+      box-shadow:0 24px 60px rgba(9,30,66,.14);
+    }
+    .congrats-head{ display:flex; align-items:center; gap:12px; margin-bottom:10px; justify-content:center; }
+    .confetti{ width:44px; height:44px; border-radius:12px; background:#e8faff; display:grid; place-items:center; font-size:22px; color:var(--brand); box-shadow:inset 0 0 0 1px rgba(0,199,255,.25); }
+    .congrats-title{
+      margin:0; font-size:26px; font-weight:900; letter-spacing:-.3px;
+      background:linear-gradient(90deg, #33b679, #2ecc71); -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+
+    /* yellow message block */
+    .highlight{
+      margin:14px auto 12px;
+      max-width:680px;
+      background:#fff7c2;
+      border:1px solid #f2e38a;
+      border-radius:14px;
+      padding:16px 18px;
+      text-align:center;
+      font-size:22px;
+      line-height:1.35;
+      font-weight:800;
+      color:#1c2a3a;
+      box-shadow:0 8px 24px rgba(0,0,0,.06);
+    }
+    .spots-pill{
+      display:inline-block;
+      margin:12px auto 8px;
+      background:#ffd84d;
+      color:#1c2a3a;
+      border-radius:999px;
+      padding:10px 16px;
+      font-weight:900;
+      box-shadow:0 8px 22px rgba(0,0,0,.08);
+      border:1px solid #f0c83a;
+    }
+    .tapcopy{ text-align:center; font-weight:900; color:#0f2542; margin:12px 0 10px; }
+
+    /* Big call button with subtle glass + gradient */
+    .call-wrap{ max-width:720px; margin:0 auto; }
+    .call-cta{
+      display:block; width:100%; text-decoration:none;
+      background:linear-gradient(180deg, #2bbd6f, #1ea65e);
+      color:#fff; border-radius:18px; padding:20px;
+      text-align:center; font-weight:1000; font-size:28px;
+      border:0; position:relative; overflow:hidden;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 14px 28px rgba(31,150,92,.28);
+      transition:transform .06s ease, filter .2s ease;
+    }
+    .call-cta:hover{ filter:brightness(1.03); transform:translateY(1px); }
+    .call-cta:active{ transform:translateY(2px) scale(.995); }
+    .call-cta::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(100% 80% at 20% 20%, rgba(255,255,255,.18), transparent 60%),
+        radial-gradient(120% 90% at 80% 40%, rgba(255,255,255,.12), transparent 70%);
+      mix-blend-mode: screen;
+    }
+
+    .finecopy{
+      max-width:720px; margin:14px auto 0;
+      text-align:center; color:#2f3e4f; font-size:15px;
+    }
+
+    /* dashed red timer */
+    .timerBox{
+      display:flex; align-items:center; justify-content:center;
+      margin:16px auto 0;
+      width:128px; height:54px;
+      border-radius:12px;
+      border:3px dashed #e11d48;
+      color:#b11432;
+      font-weight:1000; font-size:26px;
+      background:#fff5f5;
+      box-shadow:0 10px 24px rgba(225,29,72,.15);
+    }
+
+    /* responsive tweaks */
+    @media (max-width:576px){
+      .headline{ font-size:26px; }
+      .call-cta{ font-size:24px; }
+      .highlight{ font-size:20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQF5XNR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- Optional NB toast chip -->
+  <!-- <div id="nb-chip" style="position:fixed;right:12px;bottom:12px;z-index:9999;background:rgba(20,180,90,.95);color:#fff;padding:8px 12px;border-radius:999px;font-weight:800;display:none;">NB: raw_call sent</div> -->
+
+  <main class="phone-viewport" role="main">
+    <!-- Header -->
+    <div class="brand-bar"><img src="l.svg" alt="Save Max Auto Logo" style="height:22px;vertical-align:middle;" /></div>
+    <div class="gold-strip">Stop Overpaying Today – Call Us Now!</div>
+
+    <!-- ===== STAGE: toggle between quiz / loading / congrats ===== -->
+    <div id="stage" class="stage">
+      <!-- QUIZ VIEW -->
+      <section id="view-quiz" class="view show">
+        <section class="content">
+          <h1 class="headline">CALL US and cut your Auto Insurance rate by upto 80% today!</h1>
+
+          <div class="car-wrap"><img src="mana.png" alt="Blue sedan illustration" class="car-img" /></div>
+
+          <ul class="list" aria-label="Key points">
+            <li><img src="ck.png" width="14" height="14" alt=""><strong> 100% Free Help.</strong></li>
+            <li><img src="ck.png" width="14" height="14" alt=""> Takes <strong>5–10 minutes.</strong></li>
+            <li><img src="ck.png" width="14" height="14" alt=""> Tap below to <strong>CALL NOW!</strong></li>
+          </ul>
+
+          <div id="quiz" class="quiz-card">
+            <div class="quiz-title" id="quizQuestion">1. What's Your Age Range?</div>
+            <div class="quiz-sub" id="quizSub">Pick one option to continue.</div>
+            <div class="options" id="answerOptions">
+              <div class="opt" onclick="handleAge('25-39')">25–39</div>
+              <div class="opt" onclick="handleAge('40-59')">40–59</div>
+              <div class="opt" onclick="handleAge('60+')">60+</div>
+            </div>
+          </div>
+
+          <p class="subcopy">Don’t want to call? <em><u>Fill out the form instead</u></em></p>
+        </section>
+
+        <!-- Live bar -->
+        <section id="live-bar" aria-hidden="false" style="padding:12px 0 22px;">
+          <div class="live-pill" role="status" aria-live="polite" aria-atomic="true">
+            <span class="live-icon" aria-hidden="true"></span>
+            <span class="live-text"><span id="live-count">73</span> People Are Claiming Right Now!</span>
+          </div>
+          <script>
+            (function () {
+              const el = document.getElementById("live-count");
+              if (!el) return;
+              const MAX_COUNT = 97;
+              let count = Math.min(parseInt(el.textContent, 10) || 73, MAX_COUNT);
+              const minInterval = 2500, maxInterval = 6000;
+              function r(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+              function tick(){
+                const jump = Math.random()<0.12 ? r(2,6) : r(1,2);
+                const next = Math.min(count + jump, MAX_COUNT);
+                count = next;
+                el.textContent = count.toLocaleString();
+                el.classList.add("pulse");
+                setTimeout(()=>el.classList.remove("pulse"),300);
+                if (count >= MAX_COUNT) return;
+                setTimeout(tick, r(minInterval, maxInterval));
+              }
+              setTimeout(tick, 1200);
+            })();
+          </script>
+        </section>
+      </section>
+
+      <!-- LOADING VIEW (top, standalone) -->
+      <section id="view-loading" class="view">
+        <div class="loading-view">
+          <div class="loading-card">
+            <div class="spinner" aria-hidden="true"></div>
+            <div class="loading-big" id="loadingTitle">Reviewing Your Answers…</div>
+            <div class="loading-sub">Please wait while we match the best carrier for you.</div>
+            <div class="loading-steps" style="margin-top:12px;">
+              <div id="step1" class="loading-step-active">• Reviewing your answers</div>
+              <div id="step2" class="loading-step-fade">• Verifying carrier availability</div>
+              <div id="step3" class="loading-step-fade">• Confirming eligibility</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONGRATS VIEW (top, beautified; content kept as requested) -->
+      <section id="view-congrats" class="view" aria-hidden="true">
+        <div class="congrats-view">
+          <div class="congrats-card">
+            <div class="congrats-head">
+              <div class="confetti">🎉</div>
+              <h1 class="congrats-title">Congratulations, You Qualify</h1>
+            </div>
+
+            <!-- yellow highlight content (kept) -->
+            <div class="highlight">
+              Make A <u>Quick Call</u> To Claim Your<br/>
+              <strong>$25,000 Funeral Benefit Coverage</strong> Now!
+            </div>
+
+            <!-- spots remaining (kept) -->
+            <div class="spots-pill">Spots remaining: <strong>4</strong></div>
+
+            <!-- tap copy (kept) -->
+            <div class="tapcopy">Tap Below To Call Now! 👇</div>
+
+            <!-- big call button (kept number) -->
+            <div class="call-wrap">
+              <a
+                href="tel:+18338597731"
+                id="callLink"
+                class="call-cta"
+                aria-label="Call (833) 859-7731 now"
+                title="Call (833) 859-7731"
+                onpointerdown="fireNbRawCall()"
+              >
+                CALL (833) 859-7731
+              </a>
+            </div>
+
+            <!-- agent wait copy (kept) -->
+            <div class="finecopy">
+              Due to high call volume, your official agent is waiting for only <strong>3 minutes</strong>,<br/>
+              then your spot will not be reserved.
+            </div>
+
+            <!-- dashed red timer (kept) -->
+            <div class="timerBox"><span id="minutes">2</span>:<span id="seconds">52</span></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // ===== QUIZ FLOW (simple 2-step → loading → congrats) =====
+    const viewQuiz = document.getElementById('view-quiz');
+    const viewLoading = document.getElementById('view-loading');
+    const viewCongrats = document.getElementById('view-congrats');
+
+    function showView(el){
+      [viewQuiz, viewLoading, viewCongrats].forEach(v => v.classList.remove('show'));
+      el.classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const quizText = document.getElementById("quizQuestion");
+    const quizSub  = document.getElementById("quizSub");
+    const answerOptions = document.getElementById("answerOptions");
+
+    // Loading refs
+    const loadingTitle = document.getElementById('loadingTitle');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+
+    // Timer refs
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function handleAge(range){
+      rbAge(range);
+      quizText.textContent = "2. Are you a U.S. Citizen?";
+      quizSub.textContent = "This helps us match state-specific carriers.";
+      answerOptions.innerHTML = `
+        <div class="opt" onclick="handleCitizen('yes')">Yes</div>
+        <div class="opt" onclick="handleCitizen('no')">No</div>
+      `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleCitizen(ans){
+      startLoadingSequence();
+    }
+
+    function startLoadingSequence(){
+      showView(viewLoading);
+      loadingTitle.textContent = "Reviewing Your Answers…";
+      step1.className = 'loading-step-active';
+      step2.className = 'loading-step-fade';
+      step3.className = 'loading-step-fade';
+
+      setTimeout(()=>{ 
+        loadingTitle.textContent = "Verifying Carrier Availability…";
+        step1.className = 'loading-step-fade';
+        step2.className = 'loading-step-active';
+      }, 1500);
+
+      setTimeout(()=>{ 
+        loadingTitle.textContent = "Confirming Eligibility…";
+        step2.className = 'loading-step-fade';
+        step3.className = 'loading-step-active';
+      }, 3000);
+
+      setTimeout(()=>{ setStepCompleted(); }, 4500);
+    }
+
+    function setStepCompleted(){
+      showView(viewCongrats);
+      startTimer();
+    }
+
+    function startTimer() {
+      let totalSeconds = 172; // 2:52
+      const timer = setInterval(() => {
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        minutesEl.textContent = minutes;
+        secondsEl.textContent = seconds < 10 ? "0" + seconds : seconds;
+        totalSeconds--;
+        if (totalSeconds < 0) clearInterval(timer);
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
