@@ -4,6 +4,13 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport" />
   <title>Save Max Auto — Auto Insurance Savings</title>
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -35,13 +42,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 .arrow-section {
   text-align: center;
-  padding: 1em 0 .3em 0;
+  padding: 1em 0 1.5em 0;
   color: #6b7280;
 }
 
 .arrow-section i {
   font-size: 2.8em;
   animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-0.3em);
+  }
+  60% {
+    transform: translateY(-0.15em);
+  }
 }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
