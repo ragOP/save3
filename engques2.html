@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Save Max Auto</title>
+
+    <!-- Your stylesheet (kept) -->
+    <link rel="stylesheet" href="n.css" />
+
+    <!-- Icons (kept) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- TikTok Pixel Code Start -->
+    <script>
+      !function (w, d, t) {
+        w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+        ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],
+        ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+        ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},
+        ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};
+        n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;
+        e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+        ttq.load('D2H5NFRC77U7BITDGBBG');
+        ttq.page();
+      }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
+
+    <!-- ============== INLINE FIX: make whole green div clickable ============== -->
+    <style>
+      .div22 {
+        display: block;
+        width: 100%;
+        max-width: 520px;
+        margin: 12px auto;
+        background: #244572;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        padding: 16px 22px;
+        border-radius: 12px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: transform 0.06s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      }
+      .div22:hover {
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+        filter: brightness(1.03);
+      }
+      .div22:active {
+        transform: translateY(1px) scale(0.995);
+      }
+      .div22 * {
+        color: inherit;
+        text-decoration: none;
+      }
+      .glow {
+        box-shadow: 0 0 0 rgba(27, 176, 111, 0.5), 0 10px 24px rgba(0, 0, 0, 0.15);
+      }
+      .shimmer {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .shimmer::after {
+        content: "";
+        position: absolute;
+        inset: 0 -150% 0 0;
+        transform: skewX(-20deg);
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.22) 50%,
+          transparent 100%
+        );
+        animation: sh 2.2s infinite;
+      }
+      @keyframes sh {
+        0% { transform: translateX(-100%) skewX(-20deg); }
+        100% { transform: translateX(100%) skewX(-20deg); }
+      }
+
+      #nb-chip {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 99999;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 999px;
+        background: rgba(20, 180, 90, 0.95);
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        display: none;
+        pointer-events: none;
+      }
+    </style>
+    <!-- ======================================================================= -->
+
+    <!-- Ringba -->
+    <script
+      id="ringba-script"
+      src="//b-js.ringba.com/CAdab2902d46cb426ebc71aef68c81fe8e"
+      async
+      onload="window.__ringbaLoaded=true;console.log('[Ringba] script loaded')"
+      onerror="window.__ringbaBlocked=true;console.warn('[Ringba] script blocked/failed')"
+    ></script>
+
+    <!-- Ringba helper -->
+    <script>
+      window._rgba_tags = window._rgba_tags || [];
+      const RINGBA_AGE_KEY = "age";
+      const RINGBA_Q2_KEY = "insured";
+
+      function rbAge(value) {
+        try {
+          const tag = {};
+          tag[RINGBA_AGE_KEY] = value;
+          tag["newsbreak_cid"] = window.newsbreak_cid || "";
+          window._rgba_tags.push(tag);
+          console.log("[Ringba] pushed age:", tag, "→ _rgba_tags:", window._rgba_tags);
+        } catch (e) {
+          console.warn("[Ringba] age push failed", e);
+        }
+      }
+
+      function rbQ2(value) {
+        try {
+          const tag = {};
+          tag[RINGBA_Q2_KEY] = value;
+          tag["newsbreak_cid"] = window.newsbreak_cid || "";
+          window._rgba_tags.push(tag);
+          console.log("[Ringba] pushed Q2:", tag, "→ _rgba_tags:", window._rgba_tags);
+        } catch (e) {
+          console.warn("[Ringba] Q2 push failed", e);
+        }
+      }
+    </script>
+
+    <!-- NB Pixel -->
+    <script>
+      !(function (e, n, t, i, p, a, s) {
+        e[i] ||
+          (((p = e[i] =
+            function () {
+              p.process ? p.process.apply(p, arguments) : p.queue.push(arguments);
+            }).queue = []),
+          (p.t = +new Date()),
+          ((a = n.createElement(t)).async = 1),
+          (a.src =
+            "https://static.newsbreak.com/business/tracking/nbpixel.js?t=" +
+            864e5 * Math.ceil(new Date() / 864e5)),
+          (s = n.getElementsByTagName(t)[0]).parentNode.insertBefore(a, s));
+      })(window, document, "script", "nbpix");
+
+      nbpix("init", "ID-1969942605923770369");
+    </script>
+
+    <script>
+      function fireNbRawCall() {
+        try {
+          if (typeof nbpix === "function") {
+            nbpix("event", "raw_call");
+            console.log("[NB Pixel] ✅ raw_call fired successfully");
+          } else {
+            console.warn("[NB Pixel] nbpix not ready yet");
+          }
+        } catch (err) {
+          console.error("[NB Pixel] raw_call failed", err);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const callButton = document.getElementById("callLink");
+        if (!callButton) return;
+        callButton.addEventListener("click", function () {
+          fireNbRawCall();
+        });
+      });
+    </script>
+
+    <script>
+      window.__nb_events = window.__nb_events || [];
+      function showNbChip(text) {
+        var chip = document.getElementById("nb-chip");
+        if (!chip) return;
+        chip.textContent = text;
+        chip.style.display = "inline-block";
+        clearTimeout(window.__nb_chip_to);
+        window.__nb_chip_to = setTimeout(function () {
+          chip.style.display = "none";
+        }, 2000);
+      }
+      function fireNbRawCall() {
+        try {
+          window.__nb_events.push({
+            event: "raw_call",
+            at: new Date().toISOString(),
+          });
+          console.log("[NB Pixel] Firing raw_call", window.__nb_events[window.__nb_events.length - 1]);
+          if (typeof nbpix === "function") nbpix("event", "raw_call");
+          else {
+            console.warn("[NB Pixel] nbpix not ready; queuing");
+            window.__nb_fallback_queue = window.__nb_fallback_queue || [];
+            window.__nb_fallback_queue.push(["event", "raw_call"]);
+          }
+          showNbChip("NB: raw_call sent");
+        } catch (e) {
+          console.warn("[NB Pixel] raw_call failed", e);
+        }
+      }
+      window.addEventListener("load", function () {
+        if (window.__nb_fallback_queue && typeof nbpix === "function") {
+          window.__nb_fallback_queue.forEach(function (args) {
+            try { nbpix.apply(null, args); } catch (_) {}
+          });
+          window.__nb_fallback_queue.length = 0;
+        }
+      });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-PL5B9NSD");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- ==========================================================
+         NEW CONGO CSS (namespaced to avoid fighting n.css)
+    =========================================================== -->
+    <style>
+      .congo-wrap {
+        max-width: 550px;
+        margin: 0 auto;
+        background: #fff;
+        color: #1a1a1a;
+      }
+
+      .congo-top-header {
+        background: #0052a3;
+        padding: 18px 20px;
+        text-align: center;
+        color: #fff;
+        border-radius: 12px 12px 0 0;
+      }
+      .congo-top-header h2 {
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      .congo-timer-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #dc2626;
+        color: #fff;
+        text-align: center;
+        padding: 14px 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+      .congo-timer-label {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+      .congo-timer {
+        font-size: 32px;
+        font-weight: 900;
+        font-family: monospace;
+      }
+
+      .congo-success {
+        background: #22c55e;
+        padding: 20px 20px 18px;
+        text-align: center;
+        color: #fff;
+      }
+      .congo-success-icon {
+        font-size: 48px;
+        margin-bottom: 8px;
+      }
+      .congo-success-title {
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: 6px;
+      }
+      .congo-success-text {
+        font-size: 15px;
+        font-weight: 600;
+        opacity: 0.95;
+      }
+
+      .congo-content {
+        padding: 25px 20px;
+      }
+
+      .congo-savings {
+        background: #fffbeb;
+        border: 3px solid #f59e0b;
+        border-radius: 12px;
+        padding: 20px 18px;
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .congo-savings-number {
+        font-size: 44px;
+        font-weight: 900;
+        color: #92400e;
+        margin-bottom: 6px;
+      }
+      .congo-savings-label {
+        font-size: 16px;
+        font-weight: 800;
+        color: #78350f;
+        margin-bottom: 6px;
+      }
+      .congo-savings-note {
+        font-size: 13px;
+        color: #92400e;
+        font-weight: 700;
+      }
+
+      .congo-call-section { margin-bottom: 30px; position: relative; }
+      .congo-button-wrapper { position: relative; }
+      .congo-pulse-ring {
+        position: absolute; inset: 0;
+        border: 4px solid #22c55e;
+        border-radius: 50px;
+        animation: congoPulse 2s ease-out infinite;
+        pointer-events: none;
+      }
+      .congo-pulse-ring:nth-child(2){ animation-delay:.5s; }
+      .congo-pulse-ring:nth-child(3){ animation-delay:1s; }
+      @keyframes congoPulse{
+        0%{ transform:scale(1); opacity:.7; }
+        100%{ transform:scale(1.08); opacity:0; }
+      }
+
+      .congo-call-button {
+        display:block; width:100%;
+        padding: 28px 30px;
+        background: linear-gradient(135deg,#22c55e 0%,#16a34a 100%);
+        color:#fff; text-align:center; text-decoration:none;
+        border-radius:50px; font-size:26px; font-weight:900;
+        box-shadow:0 10px 30px rgba(34,197,94,.5), inset 0 -2px 8px rgba(0,0,0,.1);
+        position:relative; z-index:10;
+        animation: congoBreathe 2s ease-in-out infinite;
+        letter-spacing:.5px;
+      }
+      @keyframes congoBreathe { 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
+      .congo-call-button:active{ transform:scale(.98); }
+
+      .congo-button-icon{
+        font-size:32px; display:inline-block; margin-right:8px;
+        animation: congoRing 1.5s ease-in-out infinite;
+      }
+      @keyframes congoRing{
+        0%,100%{transform:rotate(0deg)}
+        10%,30%{transform:rotate(-15deg)}
+        20%,40%{transform:rotate(15deg)}
+      }
+      .congo-call-note{
+        text-align:center; margin-top:12px;
+        font-size:14px; color:#666; font-weight:600;
+      }
+
+      .congo-benefits{
+        background:#f8f8f8; border-radius:12px; padding:20px;
+        margin-bottom:25px;
+      }
+      .congo-benefits h3{
+        font-size:19px; font-weight:900; margin-bottom:14px; text-align:center;
+      }
+      .congo-benefit{
+        display:flex; gap:10px; padding:10px 0;
+        font-size:15px; font-weight:700; color:#1a1a1a;
+      }
+      .congo-benefit::before{
+        content:"✓"; color:#22c55e; font-size:18px; font-weight:900;
+      }
+
+      .congo-live{
+        background:#000; color:#fff; padding:18px; border-radius:12px;
+        margin-bottom:25px;
+      }
+      .congo-live-header{
+        text-align:center; font-size:13px; font-weight:800;
+        text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;
+      }
+      .congo-live-dot{
+        display:inline-block; width:8px; height:8px; background:#ef4444;
+        border-radius:50%; margin-right:6px;
+      }
+      .congo-activity{
+        padding:10px 0; font-size:14px; font-weight:600;
+        border-bottom:1px solid #333;
+      }
+      .congo-activity:last-child{ border-bottom:none; }
+      .congo-activity-name{ color:#22c55e; font-weight:800; }
+
+      .congo-process{ margin-bottom:25px; }
+      .congo-process h3{
+        font-size:20px; font-weight:900; text-align:center; margin-bottom:18px;
+      }
+      .congo-process-step{
+        display:flex; gap:12px; padding:14px; background:#f8f8f8;
+        border-radius:10px; margin-bottom:12px; border-left:4px solid #22c55e;
+      }
+      .congo-step-num{
+        width:32px; height:32px; background:#22c55e; color:#fff;
+        border-radius:50%; display:flex; align-items:center; justify-content:center;
+        font-weight:900; flex-shrink:0;
+      }
+      .congo-step-text{ font-size:15px; font-weight:700; color:#1a1a1a; }
+
+      .congo-testimonial{
+        background:#eff6ff; border:3px solid #3b82f6; border-radius:12px;
+        padding:20px; margin-bottom:25px;
+      }
+      .congo-testimonial-top{ display:flex; gap:12px; margin-bottom:12px; }
+      .congo-avatar{
+        width:48px; height:48px; background:#3b82f6; border-radius:50%;
+        display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0;
+      }
+      .congo-name{ font-size:15px; font-weight:900; color:#1e40af; margin-bottom:3px; }
+      .congo-stars{ color:#f59e0b; font-size:14px; }
+      .congo-quote{
+        font-size:15px; line-height:1.6; color:#1e40af; font-weight:700; font-style:italic;
+      }
+
+      .congo-reminder{
+        background:#fef2f2; border:3px solid #dc2626; border-radius:12px;
+        padding:20px; text-align:center; margin-bottom:25px;
+      }
+      .congo-reminder-icon{ font-size:48px; margin-bottom:12px; }
+      .congo-reminder p{
+        font-size:16px; color:#7f1d1d; font-weight:700; line-height:1.6; margin-bottom:6px;
+      }
+
+      .congo-bottom-cta{
+        background:#1e293b; padding:30px 20px; margin-top:30px; text-align:center; border-radius:0 0 12px 12px;
+      }
+      .congo-bottom-cta h3{
+        font-size:24px; font-weight:900; color:#fff; margin-bottom:20px;
+      }
+      .congo-bottom-button{
+        display:inline-block; padding:26px 45px;
+        background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
+        color:#fff; text-decoration:none; border-radius:50px; font-size:24px; font-weight:900;
+        box-shadow:0 10px 30px rgba(59,130,246,.5);
+        animation: congoBreathe 2s ease-in-out infinite;
+      }
+      .congo-bottom-icon{
+        font-size:28px; display:inline-block; margin-right:8px; animation: congoRing 1.5s ease-in-out infinite;
+      }
+
+      .congo-overlay{
+        position:fixed; inset:0; background:rgba(0,0,0,.96);
+        z-index:99999; display:none; align-items:center; justify-content:center;
+      }
+      .congo-overlay.active{ display:flex; }
+      .congo-overlay-box{
+        background:#fff; padding:40px 30px; border-radius:16px; text-align:center;
+        max-width:380px; margin:0 20px; border:5px solid #22c55e;
+      }
+      .congo-overlay-icon{ font-size:80px; margin-bottom:18px; }
+      .congo-overlay-title{ font-size:26px; font-weight:900; margin-bottom:12px; }
+      .congo-overlay-text{ font-size:16px; color:#555; font-weight:700; margin-bottom:10px; }
+      .congo-overlay-warning{
+        background:#fef3c7; border:3px solid #f59e0b; border-radius:10px;
+        padding:14px; margin:16px 0;
+      }
+      .congo-overlay-warning p{
+        font-size:20px; font-weight:900; color:#92400e; margin:0;
+      }
+
+      @media (max-width:480px){
+        .congo-timer{font-size:28px}
+        .congo-success-icon{font-size:42px}
+        .congo-success-title{font-size:22px}
+        .congo-success-text{font-size:14px}
+        .congo-savings-number{font-size:40px}
+        .congo-call-button{font-size:22px; padding:24px 25px}
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PL5B9NSD"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div
+      class="div1"
+      onclick="smoothScrollToTop(1000, 432)"
+      style="cursor: pointer"
+    >
+      <img
+        src="./l.svg"
+        alt="Policy Benefits"
+        onclick="smoothScrollToTop(1000, 432)"
+        style="cursor: pointer; width: auto; height: 28px; padding: 4px"
+      />
+    </div>
+
+    <div
+      class="div2"
+      onclick="smoothScrollToTop(1000, 432)"
+      style="cursor: pointer"
+    >
+      <span><strong id="counter">Stop Overpaying Today – Call Us Now!</strong></span>
+    </div>
+
+    <div class="div6">
+      <div class="div7">
+        <div
+          class="div8"
+          onclick="smoothScrollToTop(1000, 432)"
+          style="cursor: pointer"
+        >
+          CALL US and cut your Auto Insurance rate by upto 80% today!
+        </div>
+        <img
+          class="div9"
+          src="./mana.png"
+          alt="Money in hand"
+          onclick="smoothScrollToTop(1000, 432)"
+          style="cursor: pointer"
+        />
+        <div class="div10">
+          Checking your eligibility is very simple and takes just 60 seconds,
+          simply answer the questions below to see if you qualify now.
+        </div>
+        <div class="arrow-section">
+          <i class="fa-solid fa-angle-down"></i>
+        </div>
+        <div class="div11">
+          <div class="div12">Answer The Question Below To Proceed:</div>
+        </div>
+      </div>
+
+      <div class="div13">
+        <div class="div14">
+          <span id="quizQuestion">1. What's Your Age Range?</span>
+        </div>
+        <div class="div15" id="answerOptions">
+          <div class="div16" onclick="handleQuizP('50-65')">50-65</div>
+          <div class="div16" onclick="handleQuizN('65-80')">65-80</div>
+          <div class="div16" id="ageOption80Plus" onclick="handleQuizP('80+')">
+            80+
+          </div>
+        </div>
+        <div class="div17">
+          <div class="div18"></div>
+          <span><em><span id="claim">72</span> People Are Claiming Right Now!</em></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS (kept) -->
+    <div
+      class="div4 div5"
+      id="status"
+      style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        gap:8px;
+        position:relative;
+        overflow:hidden;
+        padding:12px 16px;
+        border-radius:12px;
+      "
+    >
+      <span id="statusMessage"></span>
+
+      <div
+        class="status-progress"
+        style="
+          width:100%;
+          max-width:260px;
+          height:6px;
+          border-radius:999px;
+          background:#e5e7eb;
+          overflow:hidden;
+          margin-top:4px;
+        "
+      >
+        <div
+          class="status-progress-bar"
+          style="
+            height:100%;
+            width:45%;
+            border-radius:inherit;
+            background:linear-gradient(90deg,#3b82f6,#6366f1);
+            animation:statusProgress 1.1s ease-in-out infinite;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <style>
+      #status {
+        background: linear-gradient(120deg, #e5e7eb 0%, #f9fafb 30%, #e5e7eb 60%);
+        background-size: 200% 100%;
+        animation: statusShimmer 1.4s linear infinite;
+      }
+      @keyframes statusShimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      @keyframes statusProgress {
+        0% { transform: translateX(-110%); }
+        50% { transform: translateX(10%); }
+        100% { transform: translateX(120%); }
+      }
+    </style>
+
+    <!-- ==========================================================
+         NEW CONGO PART (REPLACED)
+    =========================================================== -->
+    <div class="div4 div5" id="congratulations">
+      <div class="congo-wrap">
+        <!-- TOP HEADER -->
+        <div class="congo-top-header">
+          <h2>SaveMax Auto</h2>
+        </div>
+
+        <!-- TIMER (uses your existing minutes/seconds ids) -->
+        <div class="congo-timer-bar">
+          <div class="congo-timer-label">⚠️ Your Quote Expires In:</div>
+          <div class="congo-timer">
+            <span id="minutes">2</span>:<span id="seconds">52</span>
+          </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="congo-success">
+          <div class="congo-success-icon">✓</div>
+          <h1 class="congo-success-title">You Qualified!</h1>
+          <p class="congo-success-text">Your agent has your savings ready</p>
+        </div>
+
+        <div class="congo-content">
+
+          <!-- SAVINGS -->
+          <div class="congo-savings">
+            <div class="congo-savings-number">$400+</div>
+            <div class="congo-savings-label">Average Savings Per Year</div>
+            <div class="congo-savings-note">See YOUR exact savings on the call</div>
+          </div>
+
+          <!-- CALL BUTTON (keeps id callLink for NB hook) -->
+          <div class="congo-call-section">
+            <div class="congo-button-wrapper">
+              <div class="congo-pulse-ring"></div>
+              <div class="congo-pulse-ring"></div>
+              <div class="congo-pulse-ring"></div>
+
+              <a
+                href="tel:+16197753027"
+                class="congo-call-button shimmer"
+                id="callLink"
+              >
+                <span class="congo-button-icon">📞</span>
+                CALL FOR YOUR SAVINGS
+              </a>
+            </div>
+            <p class="congo-call-note">Free quote • No obligation</p>
+          </div>
+
+          <!-- BENEFITS -->
+          <div class="congo-benefits">
+            <h3>What You'll Get:</h3>
+            <div class="congo-benefit">Your exact savings amount</div>
+            <div class="congo-benefit">Compare top providers instantly</div>
+            <div class="congo-benefit">Same or better coverage</div>
+            <div class="congo-benefit">Switch in 5 minutes</div>
+          </div>
+
+          <!-- LIVE ACTIVITY -->
+          <div class="congo-live">
+            <div class="congo-live-header">
+              <span class="congo-live-dot"></span>
+              LIVE NOW
+            </div>
+            <div class="congo-activity">
+              <span class="congo-activity-name">James R.</span> - Saved $427/year (3 min ago)
+            </div>
+            <div class="congo-activity">
+              <span class="congo-activity-name">Sarah M.</span> - Saved $612/year (8 min ago)
+            </div>
+            <div class="congo-activity">
+              <span class="congo-activity-name">Mike K.</span> - On the phone now
+            </div>
+          </div>
+
+          <!-- PROCESS -->
+          <div class="congo-process">
+            <h3>How It Works</h3>
+            <div class="congo-process-step">
+              <div class="congo-step-num">1</div>
+              <div class="congo-step-text">Call → Instant connection</div>
+            </div>
+            <div class="congo-process-step">
+              <div class="congo-step-num">2</div>
+              <div class="congo-step-text">Quick questions (3 minutes)</div>
+            </div>
+            <div class="congo-process-step">
+              <div class="congo-step-num">3</div>
+              <div class="congo-step-text">Get your quote</div>
+            </div>
+            <div class="congo-process-step">
+              <div class="congo-step-num">4</div>
+              <div class="congo-step-text">Start saving today</div>
+            </div>
+          </div>
+
+          <!-- TESTIMONIAL -->
+          <div class="congo-testimonial">
+            <div class="congo-testimonial-top">
+              <div class="congo-avatar">👤</div>
+              <div>
+                <div class="congo-name">Michael T., Phoenix</div>
+                <div class="congo-stars">⭐⭐⭐⭐⭐</div>
+              </div>
+            </div>
+            <p class="congo-quote">
+              "Was paying $180/month. After this call, I'm paying $135 for better coverage. Took 5 minutes total."
+            </p>
+          </div>
+
+          <!-- REMINDER -->
+          <div class="congo-reminder">
+            <div class="congo-reminder-icon">💰</div>
+            <p>Every month you wait is money wasted.</p>
+            <p>If you save $400/year, that's $33/month.</p>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div class="congo-bottom-cta">
+          <h3>Your Agent Is Waiting</h3>
+          <a href="tel:+16197753027" class="congo-bottom-button" id="bottomBtn">
+            <span class="congo-bottom-icon">📞</span>
+            GET MY SAVINGS
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERLAY (new congo overlay) -->
+    <div class="congo-overlay" id="congoOverlay">
+      <div class="congo-overlay-box">
+        <div class="congo-overlay-icon">📞</div>
+        <h2 class="congo-overlay-title">CONNECTING NOW</h2>
+        <p class="congo-overlay-text">Your agent is picking up...</p>
+        <div class="congo-overlay-warning">
+          <p>☝️ DON'T HANG UP ☝️</p>
+        </div>
+        <p class="congo-overlay-text">This call could save you $400+ per year</p>
+      </div>
+    </div>
+    <!-- ========================================================== -->
+
+    <div class="div26">
+      Beware of other fraudulent & similar-looking websites that might look
+      exactly like ours, we have no affiliation with them. This is the only
+      official website to claim your Auto Insurance Benefit with the domain name
+      savemaxauto.org
+
+      <div class="div27">
+        <a href="/terms.html">Terms & Conditions</a> |
+        <a href="/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+
+    <div id="image-container"></div>
+
+    <script>
+      let step = "process";
+      let quizQuestion = "1. Are you over the age of 64?";
+      const statusDiv = document.getElementById("status");
+      const statusMessage = document.getElementById("statusMessage");
+      const congratulationsDiv = document.getElementById("congratulations");
+      const quizText = document.getElementById("quizQuestion");
+      const answerOptions = document.getElementById("answerOptions");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+      const counter = document.getElementById("counter");
+      const claim = document.getElementById("claim");
+      const imageContainer = document.getElementById("image-container");
+
+      const maxCounterValue = 22570;
+      const maxClaimValue = 75;
+
+      (function attachCallHandler() {
+        const link = document.getElementById("callLink");
+        if (!link) return;
+        link.addEventListener(
+          "click",
+          function () {
+            try { fireNbRawCall(); } catch (_) {}
+          },
+          { passive: true }
+        );
+      })();
+
+      setInterval(() => {
+        if (counter) {
+          let previousNumber = parseInt(counter.innerText.replace(/,/g, ""));
+          if (previousNumber < maxCounterValue) {
+            let randomIncrement = Math.floor(Math.random() * 3) + 1;
+            let newNumber = previousNumber + randomIncrement;
+            if (newNumber > maxCounterValue) newNumber = maxCounterValue;
+            counter.innerText = newNumber.toLocaleString();
+          }
+        }
+      }, 3000);
+
+      setInterval(() => {
+        if (claim) {
+          let previousNumber = parseInt(claim.innerText);
+          if (previousNumber < maxClaimValue) {
+            let randomIncrement = Math.floor(Math.random() * 2) + 1;
+            let newNumber = previousNumber + randomIncrement;
+            if (newNumber > maxClaimValue) newNumber = maxClaimValue;
+            claim.innerText = newNumber;
+          }
+        }
+      }, 3000);
+
+      function handleQuizP(ageValue) {
+        if (ageValue) rbAge(ageValue);
+
+        if (quizQuestion === "1. Are you over the age of 64?") {
+          quizQuestion = "2. Are you Currently Insured?";
+          quizText.textContent = quizQuestion;
+          setYesNoOptions();
+          smoothScrollToTop(1000, 432);
+        } else {
+          stepProcess("yes");
+        }
+      }
+
+      function handleQuizN(ageValue) {
+        if (ageValue) rbAge(ageValue);
+
+        if (quizQuestion === "1. Are you over the age of 64?") {
+          quizQuestion = "2. Are you Currently Insured?";
+          quizText.textContent = quizQuestion;
+          setYesNoOptions();
+          smoothScrollToTop(1000, 632);
+        } else {
+          stepProcess("no");
+        }
+      }
+
+      function setYesNoOptions() {
+        answerOptions.innerHTML = `
+          <div class="div16" onclick="stepProcess('yes','Yes')">Yes</div>
+          <div class="div16" onclick="stepProcess('no','No')">No</div>
+        `;
+      }
+
+      function smoothScrollToTop(duration, targetPosition = 0) {
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const run = ease(timeElapsed, startPosition, distance, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+        function ease(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return (c / 2) * t * t + b;
+          t--;
+          return (-c / 2) * (t * (t - 2) - 1) + b;
+        }
+        requestAnimationFrame(animation);
+      }
+
+      const stepProcess = (answer, value) => {
+        if (value) rbQ2(value);
+
+        smoothScrollToTop(1000);
+        const mainContent = document.querySelector(".div6");
+        mainContent.classList.add("div5");
+        statusDiv.classList.remove("div5");
+        statusMessage.textContent = "Reviewing Your Answers...";
+        setTimeout(() => {
+          statusMessage.textContent = "Verifying Availability...";
+          setTimeout(() => {
+            statusMessage.textContent = "Confirming Eligibility...";
+            setTimeout(() => {
+              setStep("completed");
+            }, 1500);
+          }, 1500);
+        }, 1500);
+      };
+
+      function setStep(newStep) {
+        step = newStep;
+        if (step === "completed") {
+          showCongratulations();
+        }
+      }
+
+      function showCongratulations() {
+        statusDiv.classList.add("div5");
+        congratulationsDiv.classList.remove("div5");
+        imageContainer.style.display = "block";
+        startTimer();
+        setTimeout(() => { imageContainer.style.display = "none"; }, 2000);
+        setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, 100);
+      }
+
+      function startTimer() {
+        let totalSeconds = 172;
+        const timer = setInterval(() => {
+          const minutes = Math.floor(totalSeconds / 60);
+          const seconds = totalSeconds % 60;
+          minutesEl.textContent = minutes;
+          secondsEl.textContent = seconds < 10 ? "0" + seconds : seconds;
+          totalSeconds--;
+          if (totalSeconds < 0) clearInterval(timer);
+        }, 1000);
+      }
+
+      /* ===============================
+         NEW CONGO overlay click logic
+         (does NOT block tel:)
+      =============================== */
+      function congoHandleClick() {
+        const ov = document.getElementById("congoOverlay");
+        if (!ov) return;
+        ov.classList.add("active");
+        setTimeout(() => ov.classList.remove("active"), 4000);
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const topBtn = document.getElementById("callLink"); // primary CTA
+        const bottomBtn = document.getElementById("bottomBtn"); // bottom CTA
+        if (topBtn) topBtn.addEventListener("click", congoHandleClick, { passive: true });
+        if (bottomBtn) bottomBtn.addEventListener("click", function(){
+          try { fireNbRawCall(); } catch(_) {}
+          congoHandleClick();
+        }, { passive: true });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Save Max Auto</title>
+
+    <!-- Your stylesheet (kept) -->
+    <link rel="stylesheet" href="n.css" />
+
+    <!-- Icons (kept) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- TikTok Pixel Code Start -->
+    <script>
+      !function (w, d, t) {
+        w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+        ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],
+        ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+        ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},
+        ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};
+        n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;
+        e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+        ttq.load('D2H5NFRC77U7BITDGBBG');
+        ttq.page();
+      }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
+
+    <!-- ============== INLINE FIX: make whole green div clickable ============== -->
+    <style>
+      .div22 {
+        display: block;
+        width: 100%;
+        max-width: 520px;
+        margin: 12px auto;
+        background: #244572;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        padding: 16px 22px;
+        border-radius: 12px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: transform 0.06s ease, box-shadow 0.2s ease, filter 0.2s ease;
+      }
+      .div22:hover {
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+        filter: brightness(1.03);
+      }
+      .div22:active {
+        transform: translateY(1px) scale(0.995);
+      }
+      .div22 * {
+        color: inherit;
+        text-decoration: none;
+      }
+      .glow {
+        box-shadow: 0 0 0 rgba(27, 176, 111, 0.5), 0 10px 24px rgba(0, 0, 0, 0.15);
+      }
+      .shimmer {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      .shimmer::after {
+        content: "";
+        position: absolute;
+        inset: 0 -150% 0 0;
+        transform: skewX(-20deg);
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.22) 50%,
+          transparent 100%
+        );
+        animation: sh 2.2s infinite;
+      }
+      @keyframes sh {
+        0% { transform: translateX(-100%) skewX(-20deg); }
+        100% { transform: translateX(100%) skewX(-20deg); }
+      }
+
+      #nb-chip {
+        position: fixed;
+        right: 12px;
+        bottom: 12px;
+        z-index: 99999;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 999px;
+        background: rgba(20, 180, 90, 0.95);
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        display: none;
+        pointer-events: none;
+      }
+    </style>
+    <!-- ======================================================================= -->
+
+    <!-- Ringba -->
+    <script
+      id="ringba-script"
+      src="//b-js.ringba.com/CAdab2902d46cb426ebc71aef68c81fe8e"
+      async
+      onload="window.__ringbaLoaded=true;console.log('[Ringba] script loaded')"
+      onerror="window.__ringbaBlocked=true;console.warn('[Ringba] script blocked/failed')"
+    ></script>
+
+    <!-- Ringba helper -->
+    <script>
+      window._rgba_tags = window._rgba_tags || [];
+      const RINGBA_AGE_KEY = "age";
+      const RINGBA_Q2_KEY = "insured";
+
+      function rbAge(value) {
+        try {
+          const tag = {};
+          tag[RINGBA_AGE_KEY] = value;
+          tag["newsbreak_cid"] = window.newsbreak_cid || "";
+          window._rgba_tags.push(tag);
+          console.log("[Ringba] pushed age:", tag, "→ _rgba_tags:", window._rgba_tags);
+        } catch (e) {
+          console.warn("[Ringba] age push failed", e);
+        }
+      }
+
+      function rbQ2(value) {
+        try {
+          const tag = {};
+          tag[RINGBA_Q2_KEY] = value;
+          tag["newsbreak_cid"] = window.newsbreak_cid || "";
+          window._rgba_tags.push(tag);
+          console.log("[Ringba] pushed Q2:", tag, "→ _rgba_tags:", window._rgba_tags);
+        } catch (e) {
+          console.warn("[Ringba] Q2 push failed", e);
+        }
+      }
+    </script>
+
+    <!-- NB Pixel -->
+    <script>
+      !(function (e, n, t, i, p, a, s) {
+        e[i] ||
+          (((p = e[i] =
+            function () {
+              p.process ? p.process.apply(p, arguments) : p.queue.push(arguments);
+            }).queue = []),
+          (p.t = +new Date()),
+          ((a = n.createElement(t)).async = 1),
+          (a.src =
+            "https://static.newsbreak.com/business/tracking/nbpixel.js?t=" +
+            864e5 * Math.ceil(new Date() / 864e5)),
+          (s = n.getElementsByTagName(t)[0]).parentNode.insertBefore(a, s));
+      })(window, document, "script", "nbpix");
+
+      nbpix("init", "ID-1969942605923770369");
+    </script>
+
+    <script>
+      function fireNbRawCall() {
+        try {
+          if (typeof nbpix === "function") {
+            nbpix("event", "raw_call");
+            console.log("[NB Pixel] ✅ raw_call fired successfully");
+          } else {
+            console.warn("[NB Pixel] nbpix not ready yet");
+          }
+        } catch (err) {
+          console.error("[NB Pixel] raw_call failed", err);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const callButton = document.getElementById("callLink");
+        if (!callButton) return;
+        callButton.addEventListener("click", function () {
+          fireNbRawCall();
+        });
+      });
+    </script>
+
+    <script>
+      window.__nb_events = window.__nb_events || [];
+      function showNbChip(text) {
+        var chip = document.getElementById("nb-chip");
+        if (!chip) return;
+        chip.textContent = text;
+        chip.style.display = "inline-block";
+        clearTimeout(window.__nb_chip_to);
+        window.__nb_chip_to = setTimeout(function () {
+          chip.style.display = "none";
+        }, 2000);
+      }
+      function fireNbRawCall() {
+        try {
+          window.__nb_events.push({
+            event: "raw_call",
+            at: new Date().toISOString(),
+          });
+          console.log("[NB Pixel] Firing raw_call", window.__nb_events[window.__nb_events.length - 1]);
+          if (typeof nbpix === "function") nbpix("event", "raw_call");
+          else {
+            console.warn("[NB Pixel] nbpix not ready; queuing");
+            window.__nb_fallback_queue = window.__nb_fallback_queue || [];
+            window.__nb_fallback_queue.push(["event", "raw_call"]);
+          }
+          showNbChip("NB: raw_call sent");
+        } catch (e) {
+          console.warn("[NB Pixel] raw_call failed", e);
+        }
+      }
+      window.addEventListener("load", function () {
+        if (window.__nb_fallback_queue && typeof nbpix === "function") {
+          window.__nb_fallback_queue.forEach(function (args) {
+            try { nbpix.apply(null, args); } catch (_) {}
+          });
+          window.__nb_fallback_queue.length = 0;
+        }
+      });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-PL5B9NSD");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- ==========================================================
+         REAL CONGO PAGE CSS (namespaced congo2-)
+    =========================================================== -->
+    <style>
+      .congo2-wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        background: white;
+        min-height: 100vh;
+        box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        position: relative;
+        overflow-x: hidden;
+        border-radius: 12px;
+      }
+
+      /* Confetti pieces (created via JS when congo opens) */
+      .congo2-confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: #22c55e;
+        animation: congo2ConfettiFall 3s linear;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      @keyframes congo2ConfettiFall {
+        to {
+          transform: translateY(100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Success screen (ONLY animates when congo2-visible is added) */
+      .congo2-success-screen {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        z-index: 10000;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+      }
+      .congo2-visible .congo2-success-screen {
+        display: flex;
+        animation: congo2FadeOut 1s ease-out 2.5s forwards;
+      }
+      @keyframes congo2FadeOut {
+        to { opacity: 0; pointer-events: none; }
+      }
+      .congo2-success-sparkle {
+        font-size: 80px;
+        margin-bottom: 20px;
+        animation: congo2Sparkle 0.5s ease-in-out infinite;
+      }
+      @keyframes congo2Sparkle {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.2) rotate(180deg); }
+      }
+      .congo2-success-text {
+        font-size: 56px;
+        font-weight: 900;
+        text-align: center;
+        padding: 0 20px;
+        color: white;
+        text-shadow: 0 0 30px rgba(0,0,0,0.3);
+        animation: congo2Bounce 0.6s ease-out 0.5s both;
+      }
+      @keyframes congo2Bounce {
+        0% { transform: translateY(-100px); opacity: 0; }
+        50% { transform: translateY(20px); }
+        100% { transform: translateY(0); opacity: 1; }
+      }
+      .congo2-success-amount {
+        font-size: 90px;
+        font-weight: 900;
+        color: white;
+        margin-top: 20px;
+        text-shadow: 0 0 40px rgba(0,0,0,0.3);
+        animation: congo2Bounce 0.6s ease-out 1s both;
+      }
+      .congo2-success-subtext {
+        font-size: 24px;
+        font-weight: 700;
+        color: white;
+        margin-top: 12px;
+        opacity: 0.95;
+        animation: congo2Bounce 0.6s ease-out 1.3s both;
+      }
+
+      .congo2-top-header {
+        background: #0052a3;
+        padding: 18px 20px;
+        text-align: center;
+        color: white;
+      }
+      .congo2-top-header h2 {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .congo2-celebration-banner {
+        background: linear-gradient(90deg, #22c55e, #16a34a, #22c55e);
+        background-size: 200% 100%;
+        animation: congo2Shimmer 3s linear infinite;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+      }
+      @keyframes congo2Shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      .congo2-celebration-banner h1 {
+        font-size: 28px;
+        font-weight: 900;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .congo2-celebration-banner p {
+        font-size: 16px;
+        font-weight: 700;
+        color: rgba(255,255,255,0.95);
+      }
+
+      .congo2-content {
+        padding: 30px 20px;
+      }
+
+      .congo2-savings-box {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border: 5px solid #fbbf24;
+        border-radius: 20px;
+        padding: 30px 20px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 40px rgba(251, 191, 36, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+      .congo2-savings-box::before {
+        content: "★";
+        position: absolute;
+        font-size: 200px;
+        color: rgba(251, 191, 36, 0.1);
+        top: -50px;
+        right: -50px;
+        animation: congo2RotateStar 20s linear infinite;
+      }
+      @keyframes congo2RotateStar {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .congo2-savings-label {
+        font-size: 18px;
+        font-weight: 900;
+        color: #92400e;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+      }
+      .congo2-savings-amount {
+        font-size: 80px;
+        font-weight: 900;
+        color: #92400e;
+        line-height: 1;
+        margin-bottom: 12px;
+        text-shadow: 3px 3px 0 rgba(146, 64, 14, 0.2);
+      }
+      .congo2-savings-period {
+        font-size: 20px;
+        font-weight: 800;
+        color: #78350f;
+        margin-bottom: 15px;
+      }
+      .congo2-savings-note {
+        font-size: 16px;
+        font-weight: 700;
+        color: #92400e;
+        background: rgba(255,255,255,0.5);
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 15px;
+      }
+
+      .congo2-urgency-timer {
+        background: linear-gradient(135deg, #dc2626, #991b1b);
+        border-radius: 16px;
+        padding: 18px 20px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+      }
+      .congo2-urgency-label {
+        font-size: 14px;
+        font-weight: 900;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
+      .congo2-urgency-display {
+        font-size: 48px;
+        font-weight: 900;
+        color: white;
+        font-family: monospace;
+        letter-spacing: 4px;
+      }
+
+      .congo2-next-steps {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        border: 3px solid #3b82f6;
+        border-radius: 16px;
+        padding: 24px 20px;
+        margin-bottom: 25px;
+      }
+      .congo2-next-steps h3 {
+        font-size: 24px;
+        font-weight: 900;
+        color: #1e40af;
+        text-align: center;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+      }
+      .congo2-step-item {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 16px;
+        align-items: center;
+      }
+      .congo2-step-item:last-child { margin-bottom: 0; }
+      .congo2-step-badge {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 900;
+        color: white;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+      }
+      .congo2-step-text {
+        font-size: 17px;
+        font-weight: 800;
+        color: #1e40af;
+      }
+
+      .congo2-call-section { margin-bottom: 30px; }
+      .congo2-call-button {
+        display: block;
+        width: 100%;
+        padding: 32px 20px;
+        background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow:
+          0 15px 50px rgba(34, 197, 94, 0.6),
+          inset 0 -3px 10px rgba(0,0,0,0.2);
+        position: relative;
+        overflow: hidden;
+        animation: congo2PulseGlow 1.5s ease-in-out infinite;
+      }
+      @keyframes congo2PulseGlow {
+        0%, 100% {
+          box-shadow: 0 15px 50px rgba(34, 197, 94, 0.6), inset 0 -3px 10px rgba(0,0,0,0.2);
+          transform: scale(1);
+        }
+        50% {
+          box-shadow: 0 15px 60px rgba(34, 197, 94, 0.8), inset 0 -3px 10px rgba(0,0,0,0.2);
+          transform: scale(1.02);
+        }
+      }
+      .congo2-call-button::before{
+        content:"";
+        position:absolute;
+        top:0; left:-100%;
+        width:100%; height:100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        animation: congo2SlideShine 2s infinite;
+      }
+      @keyframes congo2SlideShine{
+        0%{ left:-100%; }
+        100%{ left:200%; }
+      }
+      .congo2-call-button:active{ transform: scale(0.97); }
+      .congo2-call-icon{
+        font-size:48px; display:block; margin-bottom:12px;
+        animation: congo2RingPhone 1s ease-in-out infinite;
+      }
+      @keyframes congo2RingPhone{
+        0%,100%{ transform:rotate(0deg); }
+        10%,30%{ transform:rotate(-15deg); }
+        20%,40%{ transform:rotate(15deg); }
+      }
+      .congo2-call-text{
+        font-size:32px; font-weight:900; display:block; margin-bottom:8px;
+        text-transform:uppercase; letter-spacing:2px;
+      }
+      .congo2-call-subtext{ font-size:17px; font-weight:700; opacity:0.95; }
+
+      .congo2-stats-grid{
+        display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:25px;
+      }
+      .congo2-stat-card{
+        background:#f8f8f8; border:3px solid #e8e8e8; border-radius:12px;
+        padding:18px 14px; text-align:center;
+      }
+      .congo2-stat-icon{ font-size:32px; margin-bottom:8px; }
+      .congo2-stat-number{
+        font-size:28px; font-weight:900; color:#22c55e; margin-bottom:4px;
+      }
+      .congo2-stat-label{
+        font-size:12px; color:#666; font-weight:700; text-transform:uppercase;
+      }
+
+      .congo2-testimonial{
+        background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+        border:3px solid #f97316; border-radius:16px; padding:24px 20px; margin-bottom:25px;
+      }
+      .congo2-testimonial-header{
+        display:flex; gap:14px; margin-bottom:16px; align-items:center;
+      }
+      .congo2-testimonial-avatar{
+        width:55px; height:55px; background: linear-gradient(135deg, #f97316, #ea580c);
+        border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:28px;
+        flex-shrink:0; border:3px solid white;
+      }
+      .congo2-testimonial-info h4{
+        font-size:18px; font-weight:900; color:#78350f; margin-bottom:4px;
+      }
+      .congo2-testimonial-saved{
+        font-size:15px; color:#22c55e; font-weight:800;
+      }
+      .congo2-testimonial-quote{
+        font-size:16px; line-height:1.6; color:#78350f; font-weight:700; font-style:italic;
+      }
+
+      .congo2-guarantee{
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        border:3px solid #3b82f6; border-radius:16px; padding:20px; text-align:center; margin-bottom:25px;
+      }
+      .congo2-guarantee-icon{ font-size:48px; margin-bottom:12px; }
+      .congo2-guarantee-text{
+        font-size:16px; line-height:1.6; font-weight:700; color:#1e40af;
+      }
+
+      .congo2-overlay{
+        position:fixed; inset:0; background:rgba(0,0,0,0.96);
+        z-index:99999; display:none; align-items:center; justify-content:center;
+      }
+      .congo2-overlay.active{ display:flex; }
+      .congo2-overlay-box{
+        background:white; border:5px solid #22c55e; padding:50px 30px; border-radius:24px; text-align:center;
+        max-width:400px; margin:0 20px; box-shadow:0 0 100px rgba(34,197,94,0.6);
+      }
+      .congo2-overlay-icon{
+        font-size:100px; margin-bottom:24px; animation: congo2SpinIcon 1s ease-in-out infinite;
+      }
+      @keyframes congo2SpinIcon{
+        0%,100%{ transform:rotate(-10deg); }
+        50%{ transform:rotate(10deg); }
+      }
+      .congo2-overlay-title{
+        font-size:36px; font-weight:900; color:#22c55e; margin-bottom:16px; text-transform:uppercase;
+      }
+      .congo2-overlay-text{
+        font-size:19px; color:#1a1a1a; font-weight:700; margin-bottom:14px; line-height:1.6;
+      }
+      .congo2-overlay-highlight{
+        background: linear-gradient(135deg, #fef3c7, #fde68a);
+        border:3px solid #fbbf24; border-radius:12px; padding:20px; margin:24px 0;
+      }
+      .congo2-overlay-highlight p{
+        font-size:28px; font-weight:900; color:#92400e; margin:0;
+      }
+
+      @media (max-width: 480px) {
+        .congo2-success-text { font-size: 46px; }
+        .congo2-success-amount { font-size: 72px; }
+        .congo2-savings-amount { font-size: 64px; }
+        .congo2-call-text { font-size: 28px; }
+        .congo2-urgency-display { font-size: 40px; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PL5B9NSD"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div
+      class="div1"
+      onclick="smoothScrollToTop(1000, 432)"
+      style="cursor: pointer"
+    >
+      <img
+        src="./l.svg"
+        alt="Policy Benefits"
+        onclick="smoothScrollToTop(1000, 432)"
+        style="cursor: pointer; width: auto; height: 28px; padding: 4px"
+      />
+    </div>
+
+    <div
+      class="div2"
+      onclick="smoothScrollToTop(1000, 432)"
+      style="cursor: pointer"
+    >
+      <span><strong id="counter">Stop Overpaying Today – Call Us Now!</strong></span>
+    </div>
+
+    <div class="div6">
+      <div class="div7">
+        <div
+          class="div8"
+          onclick="smoothScrollToTop(1000, 432)"
+          style="cursor: pointer"
+        >
+          CALL US and cut your Auto Insurance rate by upto 80% today!
+        </div>
+        <img
+          class="div9"
+          src="./mana.png"
+          alt="Money in hand"
+          onclick="smoothScrollToTop(1000, 432)"
+          style="cursor: pointer"
+        />
+        <div class="div10">
+          Checking your eligibility is very simple and takes just 60 seconds,
+          simply answer the questions below to see if you qualify now.
+        </div>
+        <div class="arrow-section">
+          <i class="fa-solid fa-angle-down"></i>
+        </div>
+        <div class="div11">
+          <div class="div12">Answer The Question Below To Proceed:</div>
+        </div>
+      </div>
+
+      <div class="div13">
+        <div class="div14">
+          <span id="quizQuestion">1. What's Your Age Range?</span>
+        </div>
+        <div class="div15" id="answerOptions">
+          <div class="div16" onclick="handleQuizP('50-65')">50-65</div>
+          <div class="div16" onclick="handleQuizN('65-80')">65-80</div>
+          <div class="div16" id="ageOption80Plus" onclick="handleQuizP('80+')">
+            80+
+          </div>
+        </div>
+        <div class="div17">
+          <div class="div18"></div>
+          <span><em><span id="claim">72</span> People Are Claiming Right Now!</em></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATUS (kept) -->
+    <div
+      class="div4 div5"
+      id="status"
+      style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        gap:8px;
+        position:relative;
+        overflow:hidden;
+        padding:12px 16px;
+        border-radius:12px;
+      "
+    >
+      <span id="statusMessage"></span>
+
+      <div
+        class="status-progress"
+        style="
+          width:100%;
+          max-width:260px;
+          height:6px;
+          border-radius:999px;
+          background:#e5e7eb;
+          overflow:hidden;
+          margin-top:4px;
+        "
+      >
+        <div
+          class="status-progress-bar"
+          style="
+            height:100%;
+            width:45%;
+            border-radius:inherit;
+            background:linear-gradient(90deg,#3b82f6,#6366f1);
+            animation:statusProgress 1.1s ease-in-out infinite;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <style>
+      #status {
+        background: linear-gradient(120deg, #e5e7eb 0%, #f9fafb 30%, #e5e7eb 60%);
+        background-size: 200% 100%;
+        animation: statusShimmer 1.4s linear infinite;
+      }
+      @keyframes statusShimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      @keyframes statusProgress {
+        0% { transform: translateX(-110%); }
+        50% { transform: translateX(10%); }
+        100% { transform: translateX(120%); }
+      }
+    </style>
+
+    <!-- ==========================================================
+         REAL CONGO PART (REPLACED)
+    =========================================================== -->
+    <div class=" div5" id="congratulations">
+      <div class="congo2-wrap">
+
+        <!-- SUCCESS SCREEN (plays when congo opens) -->
+        <div class="congo2-success-screen">
+          <div class="congo2-success-sparkle">✨</div>
+          <div class="congo2-success-text">APPROVED!</div>
+          <div class="congo2-success-amount">$423</div>
+          <div class="congo2-success-subtext">Savings Ready</div>
+        </div>
+
+        <!-- TOP HEADER -->
+       
+
+        <!-- CELEBRATION BANNER -->
+        <div class="congo2-celebration-banner">
+          <h1>🎉 You're Approved! 🎉</h1>
+          <p>Your Special Savings Rate Is Ready</p>
+        </div>
+
+        <div class="congo2-content">
+          <!-- SAVINGS BOX -->
+          <div class="congo2-savings-box">
+            <div class="congo2-savings-label">💰 Your Savings 💰</div>
+            <div class="congo2-savings-amount">$423</div>
+            <div class="congo2-savings-period">Per Year</div>
+            <div class="congo2-savings-note">
+              ⚡ This is real money you keep every year — not a temporary discount!
+            </div>
+          </div>
+
+          <!-- URGENCY TIMER (uses your existing ids so startTimer works) -->
+          <div class="congo2-urgency-timer">
+            <div class="congo2-urgency-label">⏰ Lock In Your Rate In:</div>
+            <div class="congo2-urgency-display">
+              <span id="minutes">2</span>:<span id="seconds">00</span>
+            </div>
+          </div>
+
+          <!-- NEXT STEPS -->
+          <div class="congo2-next-steps">
+            <h3>Here's What Happens Next:</h3>
+            <div class="congo2-step-item">
+              <div class="congo2-step-badge">1</div>
+              <div class="congo2-step-text">Tap the button below</div>
+            </div>
+            <div class="congo2-step-item">
+              <div class="congo2-step-badge">2</div>
+              <div class="congo2-step-text">Talk to your agent (5 minutes)</div>
+            </div>
+            <div class="congo2-step-item">
+              <div class="congo2-step-badge">3</div>
+              <div class="congo2-step-text">Lock in your $423/year savings</div>
+            </div>
+          </div>
+
+          <!-- CALL BUTTON (keeps id callLink for NB raw_call) -->
+          <div class="congo2-call-section">
+            <a href="tel:+16197753027" class="congo2-call-button shimmer" id="callLink">
+              <span class="congo2-call-icon">📞</span>
+              <span class="congo2-call-text">Get My Savings</span>
+              <span class="congo2-call-subtext">Tap to connect with your agent now</span>
+            </a>
+          </div>
+
+          <!-- STATS GRID -->
+          <div class="congo2-stats-grid">
+            <div class="congo2-stat-card">
+              <div class="congo2-stat-icon">⏱️</div>
+              <div class="congo2-stat-number">5</div>
+              <div class="congo2-stat-label">Minute Call</div>
+            </div>
+            <div class="congo2-stat-card">
+              <div class="congo2-stat-icon">💯</div>
+              <div class="congo2-stat-number">FREE</div>
+              <div class="congo2-stat-label">No Cost</div>
+            </div>
+            <div class="congo2-stat-card">
+              <div class="congo2-stat-icon">🎊</div>
+              <div class="congo2-stat-number">847</div>
+              <div class="congo2-stat-label">Saved Today</div>
+            </div>
+            <div class="congo2-stat-card">
+              <div class="congo2-stat-icon">⭐</div>
+              <div class="congo2-stat-number">4.9</div>
+              <div class="congo2-stat-label">Rating</div>
+            </div>
+          </div>
+
+          <!-- TESTIMONIAL -->
+          <div class="congo2-testimonial">
+            <div class="congo2-testimonial-header">
+              <div class="congo2-testimonial-avatar">👤</div>
+              <div class="congo2-testimonial-info">
+                <h4>Maria S., Phoenix</h4>
+                <div class="congo2-testimonial-saved">Saving $441/year</div>
+              </div>
+            </div>
+            <p class="congo2-testimonial-quote">
+              "I called expecting a sales pitch. Instead, they asked a few questions and gave me a real quote.
+              Now I'm saving $36/month for better coverage. Easiest decision I've made!"
+            </p>
+          </div>
+
+          <!-- GUARANTEE -->
+          <div class="congo2-guarantee">
+            <div class="congo2-guarantee-icon">🛡️</div>
+            <p class="congo2-guarantee-text">
+              <strong>100% Free Quote Guarantee</strong><br />
+              No obligation. No credit card. No hassle.<br />
+              Just your real savings amount.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="congo2-overlay" id="congoOverlay">
+      <div class="congo2-overlay-box">
+        <div class="congo2-overlay-icon">📞</div>
+        <h2 class="congo2-overlay-title">CONNECTING...</h2>
+        <p class="congo2-overlay-text">Your licensed agent is picking up right now</p>
+        <div class="congo2-overlay-highlight">
+          <p>YOUR $423 IS WAITING!</p>
+        </div>
+        <p class="congo2-overlay-text">
+          Don't hang up — this 5-minute call locks in your savings rate forever
+        </p>
+      </div>
+    </div>
+    <!-- ========================================================== -->
+
+    <div class="div26">
+      Beware of other fraudulent & similar-looking websites that might look
+      exactly like ours, we have no affiliation with them. This is the only
+      official website to claim your Auto Insurance Benefit with the domain name
+      savemaxauto.org
+
+      <div class="div27">
+        <a href="/terms.html">Terms & Conditions</a> |
+        <a href="/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+
+    <div id="image-container"></div>
+
+    <script>
+      let step = "process";
+      let quizQuestion = "1. Are you over the age of 64?";
+      const statusDiv = document.getElementById("status");
+      const statusMessage = document.getElementById("statusMessage");
+      const congratulationsDiv = document.getElementById("congratulations");
+      const quizText = document.getElementById("quizQuestion");
+      const answerOptions = document.getElementById("answerOptions");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+      const counter = document.getElementById("counter");
+      const claim = document.getElementById("claim");
+      const imageContainer = document.getElementById("image-container");
+
+      const maxCounterValue = 22570;
+      const maxClaimValue = 75;
+
+      (function attachCallHandler() {
+        const link = document.getElementById("callLink");
+        if (!link) return;
+        link.addEventListener(
+          "click",
+          function () {
+            try { fireNbRawCall(); } catch (_) {}
+          },
+          { passive: true }
+        );
+      })();
+
+      setInterval(() => {
+        if (counter) {
+          let previousNumber = parseInt(counter.innerText.replace(/,/g, ""));
+          if (previousNumber < maxCounterValue) {
+            let randomIncrement = Math.floor(Math.random() * 3) + 1;
+            let newNumber = previousNumber + randomIncrement;
+            if (newNumber > maxCounterValue) newNumber = maxCounterValue;
+            counter.innerText = newNumber.toLocaleString();
+          }
+        }
+      }, 3000);
+
+      setInterval(() => {
+        if (claim) {
+          let previousNumber = parseInt(claim.innerText);
+          if (previousNumber < maxClaimValue) {
+            let randomIncrement = Math.floor(Math.random() * 2) + 1;
+            let newNumber = previousNumber + randomIncrement;
+            if (newNumber > maxClaimValue) newNumber = maxClaimValue;
+            claim.innerText = newNumber;
+          }
+        }
+      }, 3000);
+
+      function handleQuizP(ageValue) {
+        if (ageValue) rbAge(ageValue);
+
+        if (quizQuestion === "1. Are you over the age of 64?") {
+          quizQuestion = "2. Are you Currently Insured?";
+          quizText.textContent = quizQuestion;
+          setYesNoOptions();
+          smoothScrollToTop(1000, 432);
+        } else {
+          stepProcess("yes");
+        }
+      }
+
+      function handleQuizN(ageValue) {
+        if (ageValue) rbAge(ageValue);
+
+        if (quizQuestion === "1. Are you over the age of 64?") {
+          quizQuestion = "2. Are you Currently Insured?";
+          quizText.textContent = quizQuestion;
+          setYesNoOptions();
+          smoothScrollToTop(1000, 632);
+        } else {
+          stepProcess("no");
+        }
+      }
+
+      function setYesNoOptions() {
+        answerOptions.innerHTML = `
+          <div class="div16" onclick="stepProcess('yes','Yes')">Yes</div>
+          <div class="div16" onclick="stepProcess('no','No')">No</div>
+        `;
+      }
+
+      function smoothScrollToTop(duration, targetPosition = 0) {
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const run = ease(timeElapsed, startPosition, distance, duration);
+          window.scrollTo(0, run);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+        function ease(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return (c / 2) * t * t + b;
+          t--;
+          return (-c / 2) * (t * (t - 2) - 1) + b;
+        }
+        requestAnimationFrame(animation);
+      }
+
+      const stepProcess = (answer, value) => {
+        if (value) rbQ2(value);
+
+        smoothScrollToTop(1000);
+        const mainContent = document.querySelector(".div6");
+        mainContent.classList.add("div5");
+        statusDiv.classList.remove("div5");
+        statusMessage.textContent = "Reviewing Your Answers...";
+        setTimeout(() => {
+          statusMessage.textContent = "Verifying Availability...";
+          setTimeout(() => {
+            statusMessage.textContent = "Confirming Eligibility...";
+            setTimeout(() => {
+              setStep("completed");
+            }, 1500);
+          }, 1500);
+        }, 1500);
+      };
+
+      function setStep(newStep) {
+        step = newStep;
+        if (step === "completed") {
+          showCongratulations();
+        }
+      }
+
+      function showCongratulations() {
+        statusDiv.classList.add("div5");
+        congratulationsDiv.classList.remove("div5");
+
+        // ✅ trigger success-screen + confetti only now
+        startCongoEffects();
+
+        imageContainer.style.display = "block";
+        startTimer();
+        setTimeout(() => { imageContainer.style.display = "none"; }, 2000);
+        setTimeout(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, 100);
+      }
+
+      function startTimer() {
+        let totalSeconds = 172;
+        const timer = setInterval(() => {
+          const minutes = Math.floor(totalSeconds / 60);
+          const seconds = totalSeconds % 60;
+          minutesEl.textContent = minutes;
+          secondsEl.textContent = seconds < 10 ? "0" + seconds : seconds;
+          totalSeconds--;
+          if (totalSeconds < 0) clearInterval(timer);
+        }, 1000);
+      }
+
+      /* ===============================
+         Congo effects (confetti + success screen)
+      =============================== */
+      function createConfettiBurst() {
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement("div");
+            confetti.className = "congo2-confetti";
+            confetti.style.left = Math.random() * 100 + "%";
+            confetti.style.background =
+              ["#22c55e", "#fbbf24", "#3b82f6", "#f97316"][
+                Math.floor(Math.random() * 4)
+              ];
+            confetti.style.animationDelay = Math.random() * 0.5 + "s";
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+          }, i * 30);
+        }
+      }
+
+      function startCongoEffects() {
+        // add class so success-screen animations run
+        congratulationsDiv.classList.add("congo2-visible");
+        createConfettiBurst();
+      }
+
+      /* ===============================
+         Overlay on CTA click (do NOT block tel:)
+      =============================== */
+      function showCongoOverlay() {
+        const ov = document.getElementById("congoOverlay");
+        if (!ov) return;
+        ov.classList.add("active");
+        setTimeout(() => ov.classList.remove("active"), 4000);
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const topBtn = document.getElementById("callLink");
+        if (topBtn) {
+          topBtn.addEventListener("click", showCongoOverlay, { passive: true });
+        }
+      });
+
+      function handleCall() {}
+    </script>
+  </body>
+</html>
