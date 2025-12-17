@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoQuote Pilot — Eco Theme (Cleaner Hero + Better Quotes/Reviews)</title>
+
+  <!-- Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ugaqmwe991");
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PL5B9NSD');</script>
+
+  <!-- Tracking -->
+  <script type="text/javascript" src="https://trk.reliableautopolicy.com/track.js?rtkcmpid=692430d43ce7194f6210e962"></script>
+
+  <style>
+    :root{
+      --bg:#eef1ea;
+      --surface:#f7f8f3;
+      --white:#ffffff;
+
+      --ink:#111815;
+      --muted:#5f6b63;
+
+      --line:rgba(17,24,21,.10);
+      --line2:rgba(17,24,21,.08);
+
+      --accent:#3e6f4e;
+      --accent2:#9bd18f;
+
+      --cta:#171a18;
+      --ctaText:#fff;
+
+      --radius-xl:26px;
+      --radius-lg:20px;
+      --radius-md:14px;
+
+      --shadow:0 16px 50px rgba(0,0,0,.10);
+      --shadow-soft:0 10px 26px rgba(0,0,0,.08);
+
+      --inner:980px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 25% -10%, rgba(155,209,143,.22), transparent 55%),
+        radial-gradient(900px 600px at 110% 10%, rgba(62,111,78,.10), transparent 50%),
+        var(--bg);
+    }
+
+    .inner{max-width:var(--inner); margin:0 auto; padding:0 14px;}
+    .tap{cursor:pointer; -webkit-tap-highlight-color:transparent;}
+    .tap:active{transform:translateY(1px);}
+
+    /* ===== Header (new) ===== */
+    .header{
+      position:sticky; top:0; z-index:80;
+      background:rgba(247,248,243,.86);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .header-row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      max-width:var(--inner);
+      margin:0 auto;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width:0;
+      font-weight:900;
+    }
+    .brand-badge{
+      width:36px;height:36px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(62,111,78,.18), rgba(155,209,143,.22));
+      border:1px solid rgba(62,111,78,.20);
+      box-shadow:0 12px 22px rgba(0,0,0,.08);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
+    .brand-badge i{color:var(--accent);font-size:14px;}
+    .brand-text{display:flex;flex-direction:column;line-height:1.05; min-width:0;}
+    .brand-text .name{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .brand-text .mini{
+      font-size:11px;font-weight:900;color:var(--muted);
+      display:flex;align-items:center;gap:7px;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background:var(--accent2);
+      box-shadow:0 0 0 6px rgba(155,209,143,.18);
+      flex:0 0 auto;
+    }
+    .header-actions{display:flex;align-items:center;gap:10px;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.72);
+      box-shadow:0 12px 20px rgba(0,0,0,.06);
+      font-weight:900;
+      font-size:12px;
+      color:var(--ink);
+      user-select:none;
+    }
+    .pill i{color:var(--accent);font-size:12px;}
+    .icon-btn{
+      width:40px;height:40px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.72);
+      box-shadow:0 12px 20px rgba(0,0,0,.06);
+      display:grid;place-items:center;
+    }
+    .icon-btn i{font-size:14px;color:var(--ink);opacity:.86;}
+
+    /* ===== Hero (less content) ===== */
+    .hero{padding:14px 0 12px;}
+    .hero-card{
+      border-radius:var(--radius-xl);
+      background:linear-gradient(180deg, rgba(247,248,243,.92), rgba(247,248,243,.70));
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-media{
+      min-height:230px;
+      background:
+        radial-gradient(680px 360px at 30% 30%, rgba(155,209,143,.32), transparent 60%),
+        linear-gradient(180deg, rgba(17,24,21,.06), rgba(17,24,21,0)),
+        url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center/cover no-repeat;
+      position:relative;
+    }
+    .hero-float{
+      position:absolute; left:14px; top:14px;
+      display:flex; gap:8px; flex-wrap:wrap;
+      max-width:calc(100% - 28px);
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:7px;
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(17,24,21,.10);
+      font-size:12px; font-weight:900;
+      box-shadow:0 12px 18px rgba(0,0,0,.06);
+    }
+    .chip i{color:var(--accent);font-size:12px;}
+    .hero-like{
+      position:absolute; right:14px; top:14px;
+      width:42px;height:42px;border-radius:999px;
+      background:rgba(255,255,255,.74);
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:0 14px 24px rgba(0,0,0,.08);
+      display:grid;place-items:center;
+    }
+    .hero-like i{opacity:.78;}
+    .hero-body{padding:14px 14px 14px;}
+    .hero-title{
+      margin:0 0 10px;
+      font-size:28px;
+      line-height:1.08;
+      letter-spacing:-.6px;
+      font-weight:900;
+    }
+    .hero-title span{
+      color:var(--accent);
+      background:linear-gradient(90deg, rgba(155,209,143,.55), rgba(155,209,143,.18));
+      padding:0 10px;
+      border-radius:12px;
+      border:1px solid rgba(62,111,78,.16);
+    }
+    .hero-sub{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+    }
+
+    /* ===== Quote Builder (question) ===== */
+    .qcard{
+      border-radius:var(--radius-lg);
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:var(--shadow-soft);
+      padding:14px;
+      scroll-margin-top: 84px;
+    }
+    .qrow-top{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .qtitle{
+      margin:0;
+      font-size:15px;
+      font-weight:900;
+      display:flex; align-items:center; gap:10px;
+    }
+    .qtitle .dot2{
+      width:10px;height:10px;border-radius:999px;
+      background:var(--accent2);
+      box-shadow:0 0 0 6px rgba(155,209,143,.20);
+    }
+    .mini-badge{
+      font-size:11px;
+      font-weight:900;
+      color:var(--muted);
+      background:rgba(230,239,226,.70);
+      border:1px solid rgba(62,111,78,.14);
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .qgrid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+    .btn{
+      border:none; text-decoration:none;
+      width:100%;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      font-weight:900;
+      padding:14px 14px;
+      border-radius:16px;
+      user-select:none;
+      transition:transform .12s ease, filter .12s ease, box-shadow .12s ease;
+    }
+    .btn:active{transform:translateY(1px) scale(.99);}
+    .btn-yes{
+      background:linear-gradient(180deg, rgba(155,209,143,.82), rgba(155,209,143,.56));
+      color:#0b1a10;
+      border:1px solid rgba(62,111,78,.22);
+      box-shadow:0 14px 28px rgba(62,111,78,.18);
+    }
+    .btn-no{
+      background:rgba(255,255,255,.86);
+      color:var(--ink);
+      border:1px solid rgba(17,24,21,.14);
+      box-shadow:0 14px 28px rgba(0,0,0,.10);
+    }
+
+    .cta{
+      margin-top:12px;
+      background:var(--cta);
+      color:var(--ctaText);
+      border-radius:999px;
+      padding:16px 16px;
+      font-weight:900;
+      letter-spacing:.2px;
+      box-shadow:0 18px 38px rgba(0,0,0,.20);
+      position:relative;
+      overflow:hidden;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+    }
+    /* shimmer ONLY here */
+    .cta:before{
+      content:"";
+      position:absolute; inset:-40% -30%;
+      background:linear-gradient(110deg, transparent 35%, rgba(255,255,255,.26), transparent 65%);
+      transform:translateX(-60%) rotate(8deg);
+      animation:sh 2.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes sh{
+      0%{transform:translateX(-70%) rotate(8deg)}
+      55%{transform:translateX(20%) rotate(8deg)}
+      100%{transform:translateX(70%) rotate(8deg)}
+    }
+
+    .secure{
+      margin-top:10px;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:900;
+      text-align:center;
+    }
+    .lock{
+      width:18px;height:18px;border-radius:7px;
+      display:grid;place-items:center;
+      background:rgba(230,239,226,.85);
+      border:1px solid rgba(62,111,78,.16);
+      color:var(--accent);
+      flex:0 0 auto;
+    }
+
+    /* ===== Better Sections ===== */
+    .section{padding:14px 0 8px;}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin-bottom:10px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-.3px;
+    }
+    .section-head .hint{
+      font-size:12px;
+      font-weight:900;
+      color:var(--muted);
+      background:rgba(255,255,255,.60);
+      border:1px solid rgba(17,24,21,.10);
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    /* ===== Real-Time Quotes (redesigned) =====
+       - looks like app list, not table
+       - icon badge for car brand
+       - right side price pill
+       - "live" pulsing dot
+    */
+    .live-card{
+      border-radius:var(--radius-xl);
+      background:rgba(247,248,243,.88);
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+      position:relative;
+    }
+    .live-top{
+      padding:12px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background:rgba(255,255,255,.55);
+      border-bottom:1px solid rgba(17,24,21,.08);
+    }
+    .live-top .left{
+      display:flex;align-items:center;gap:10px;min-width:0;
+      font-weight:900;
+    }
+    .live-dot{
+      width:9px;height:9px;border-radius:999px;
+      background:#22c55e;
+      box-shadow:0 0 0 0 rgba(34,197,94,.38);
+      animation:pulse 1.6s ease-in-out infinite;
+      flex:0 0 auto;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(34,197,94,.35)}
+      70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}
+      100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}
+    }
+    .live-top .title{
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .live-top .right{
+      display:flex;align-items:center;gap:8px;
+    }
+    .seg{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(230,239,226,.70);
+      border:1px solid rgba(62,111,78,.14);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:900;
+      color:var(--accent);
+      user-select:none;
+    }
+    .seg i{font-size:12px;}
+    .seg-btn{
+      width:40px;height:40px;border-radius:999px;
+      border:1px solid rgba(17,24,21,.10);
+      background:rgba(255,255,255,.70);
+      display:grid;place-items:center;
+      box-shadow:0 12px 18px rgba(0,0,0,.06);
+    }
+
+    .live-viewport{
+      height:290px;
+      overflow:hidden;
+      position:relative;
+      background:rgba(255,255,255,.25);
+    }
+
+    .live-list{
+      will-change:transform;
+      animation:liveScroll linear infinite;
+      animation-duration: var(--scroll-time, 55s);
+    }
+    @keyframes liveScroll{
+      from{transform:translateY(0);}
+      to{transform:translateY(-50%);}
+    }
+    .live-viewport:hover .live-list{animation-play-state:paused;}
+
+    .quote-item{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px 12px;
+      border-top:1px solid rgba(17,24,21,.08);
+    }
+    .quote-item:nth-child(even){background:rgba(230,239,226,.34);}
+
+    .qleft{
+      display:flex; align-items:center; gap:10px;
+      min-width:0;
+    }
+    .badge{
+      width:40px;height:40px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(62,111,78,.18), rgba(155,209,143,.22));
+      border:1px solid rgba(62,111,78,.18);
+      display:grid;place-items:center;
+      box-shadow:0 12px 20px rgba(0,0,0,.06);
+      flex:0 0 auto;
+    }
+    .badge i{color:var(--accent);font-size:14px;}
+    .qmeta{min-width:0;}
+    .qmeta .line1{
+      font-weight:900;
+      font-size:13px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .qmeta .line2{
+      margin-top:3px;
+      font-weight:900;
+      font-size:11.5px;
+      color:var(--muted);
+      display:flex; align-items:center; gap:8px;
+    }
+    .name-blur{
+      width:88px; height:10px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(17,24,21,.14), rgba(17,24,21,.06));
+      display:inline-block;
+    }
+
+    .qright{
+      display:flex; align-items:center; gap:10px;
+      flex:0 0 auto;
+    }
+    .state-pill{
+      font-size:11px;
+      font-weight:900;
+      color:var(--muted);
+      background:rgba(255,255,255,.70);
+      border:1px solid rgba(17,24,21,.10);
+      padding:8px 10px;
+      border-radius:999px;
+      min-width:44px;
+      text-align:center;
+    }
+    .rate-pill{
+      font-size:12px;
+      font-weight:900;
+      color:#0b1a10;
+      background:linear-gradient(180deg, rgba(155,209,143,.84), rgba(155,209,143,.62));
+      border:1px solid rgba(62,111,78,.18);
+      padding:10px 12px;
+      border-radius:999px;
+      box-shadow:0 14px 22px rgba(62,111,78,.16);
+      white-space:nowrap;
+    }
+
+    /* ===== Reviews (redesigned) =====
+       - horizontal carousel with snap (mobile)
+       - big quote + compact footer
+       - rating + "verified" on top row
+    */
+    .reviews-wrap{
+      border-radius:var(--radius-xl);
+      background:rgba(247,248,243,.88);
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+    .reviews-top{
+      padding:12px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background:rgba(255,255,255,.55);
+      border-bottom:1px solid rgba(17,24,21,.08);
+    }
+    .reviews-top .left{
+      display:flex;align-items:center;gap:10px;min-width:0;
+      font-weight:900;
+    }
+    .stars{
+      display:inline-flex; align-items:center; gap:3px;
+      color:#caa44b;
+      font-size:12px;
+    }
+    .vbadge{
+      display:inline-flex; align-items:center; gap:7px;
+      font-weight:900; font-size:12px;
+      color:var(--accent);
+      background:rgba(230,239,226,.70);
+      border:1px solid rgba(62,111,78,.14);
+      padding:8px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+      user-select:none;
+    }
+    .vbadge i{font-size:12px;}
+    .reviews-rail{
+      display:flex;
+      gap:12px;
+      padding:12px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      background:rgba(255,255,255,.25);
+    }
+    .reviews-rail::-webkit-scrollbar{display:none;}
+    .rslide{
+      min-width:82%;
+      max-width:82%;
+      scroll-snap-align:center;
+      border-radius:22px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:0 18px 40px rgba(0,0,0,.10);
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+    }
+    .rslide:before{
+      content:"";
+      position:absolute; inset:-30% -20%;
+      background:radial-gradient(240px 180px at 20% 30%, rgba(155,209,143,.35), transparent 60%),
+                 radial-gradient(220px 180px at 90% 10%, rgba(62,111,78,.16), transparent 55%);
+      pointer-events:none;
+    }
+    .rslide .rhead{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      position:relative;
+    }
+    .rchip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(230,239,226,.75);
+      border:1px solid rgba(62,111,78,.14);
+      font-weight:900;
+      font-size:11px;
+      color:var(--accent);
+      white-space:nowrap;
+    }
+    .rchip i{font-size:11px;}
+    .rquote{
+      margin:12px 0 14px;
+      position:relative;
+      font-size:14px;
+      font-weight:900;
+      line-height:1.5;
+      color:var(--ink);
+      letter-spacing:-.2px;
+    }
+    .rquote .qmark{
+      color:rgba(62,111,78,.35);
+      font-size:26px;
+      margin-right:6px;
+      vertical-align:top;
+    }
+    .rfoot{
+      display:flex; align-items:center; gap:10px;
+      position:relative;
+    }
+    .avatar{
+      width:44px;height:44px;border-radius:999px; overflow:hidden;
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:0 12px 22px rgba(0,0,0,.10);
+      background:#fff;
+      flex:0 0 auto;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;}
+    .rmeta{min-width:0;}
+    .rmeta .name{font-weight:900;font-size:13px;margin:0;}
+    .rmeta .sub{
+      margin-top:3px;
+      font-size:12px;
+      font-weight:900;
+      color:var(--muted);
+      display:flex; align-items:center; gap:8px;
+    }
+
+    /* Footer */
+    footer{
+      padding:14px 0 30px;
+      color:rgba(17,24,21,.70);
+      font-size:10.75px;
+      line-height:1.5;
+    }
+    .foot{
+      border-radius:var(--radius-xl);
+      background:rgba(247,248,243,.78);
+      border:1px solid rgba(17,24,21,.10);
+      box-shadow:var(--shadow-soft);
+      padding:14px;
+    }
+    .links{
+      margin-top:10px;
+      display:flex; flex-wrap:wrap;
+      justify-content:center;
+      gap:8px;
+      font-weight:900;
+    }
+    .links a{
+      color:var(--ink);
+      text-decoration:none;
+      background:rgba(255,255,255,.55);
+      border:1px solid rgba(17,24,21,.10);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+
+    /* Desktop */
+    @media (min-width: 900px){
+      .hero-media{min-height:280px;}
+      .hero-title{font-size:40px;}
+      .rslide{min-width:360px; max-width:360px;}
+      .live-viewport{height:320px;}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PL5B9NSD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-row">
+      <div class="brand">
+        <div class="brand-badge"><i class="fa-solid fa-leaf"></i></div>
+        <div class="brand-text">
+          <div class="name">AutoQuote Pilot</div>
+          <div class="mini"><span class="dot"></span> Fast quotes • Secure</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="pill tap scroll-trigger"><i class="fa-solid fa-bolt"></i> Get Quote</div>
+        <div class="icon-btn tap" title="Search"><i class="fa-solid fa-magnifying-glass"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="inner">
+
+    <!-- HERO (minimal content) -->
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-media tap scroll-trigger" aria-label="Scroll to question">
+          <div class="hero-float">
+            <div class="chip"><i class="fa-solid fa-shield-heart"></i> Secure</div>
+            <div class="chip"><i class="fa-solid fa-clock"></i> 60-sec</div>
+            <div class="chip"><i class="fa-solid fa-percent"></i> Save Big</div>
+          </div>
+          <div class="hero-like"><i class="fa-regular fa-heart"></i></div>
+        </div>
+
+        <div class="hero-body">
+          <h1 class="hero-title tap scroll-trigger">
+            Save up to <span>$710</span> on auto insurance
+          </h1>
+          <p class="hero-sub tap scroll-trigger" id="stateLine">
+            Rates from <b>$19.99/mo</b> in America
+          </p>
+
+          <div class="qcard" id="questionCard">
+            <div class="qrow-top">
+              <h3 class="qtitle"><span class="dot2"></span> Are you currently insured?</h3>
+              <span class="mini-badge">Takes ~60 seconds</span>
+            </div>
+
+            <div class="qgrid">
+              <a class="btn btn-yes tap" href="https://trk.reliableautopolicy.com/click"><i class="fa-solid fa-check"></i> YES</a>
+              <a class="btn btn-no tap" href="https://trk.reliableautopolicy.com/click"><i class="fa-solid fa-xmark"></i> NO</a>
+            </div>
+
+            <div class="cta tap scroll-trigger" role="button">
+              Continue <i class="fa-solid fa-arrow-right"></i>
+            </div>
+
+            <div class="secure">
+              <span class="lock"><i class="fa-solid fa-lock"></i></span>
+              <span>We keep your info 100% secure &amp; confidential.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REAL-TIME QUOTES (NEW DESIGN) -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Real-Time Quotes</h2>
+        <div class="hint">Auto-updating</div>
+      </div>
+
+      <div class="live-card">
+        <div class="live-top">
+          <div class="left">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span class="title">Live pricing snapshots</span>
+          </div>
+          <div class="right">
+            <span class="seg"><i class="fa-solid fa-wave-square"></i> Live</span>
+            <div class="seg-btn tap" title="Pause / Play" id="toggleLive">
+              <i class="fa-solid fa-pause"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="live-viewport" id="liveViewport">
+          <div class="live-list" id="liveList">
+
+            <div class="quote-item">
+              <div class="qleft">
+                <div class="badge"><i class="fa-solid fa-car"></i></div>
+                <div class="qmeta">
+                  <div class="line1"><span class="name-blur"></span></div>
+                  <div class="line2"><span>Chrysler</span> • <span>Standard</span></div>
+                </div>
+              </div>
+              <div class="qright">
+                <div class="state-pill">MT</div>
+                <div class="rate-pill">$32/mo</div>
+              </div>
+            </div>
+
+            <div class="quote-item">
+              <div class="qleft">
+                <div class="badge"><i class="fa-solid fa-car"></i></div>
+                <div class="qmeta">
+                  <div class="line1"><span class="name-blur" style="width:72px;"></span></div>
+                  <div class="line2"><span>Ford</span> • <span>Basic</span></div>
+                </div>
+              </div>
+              <div class="qright">
+                <div class="state-pill">NC</div>
+                <div class="rate-pill">$29/mo</div>
+              </div>
+            </div>
+
+            <div class="quote-item">
+              <div class="qleft">
+                <div class="badge"><i class="fa-solid fa-car"></i></div>
+                <div class="qmeta">
+                  <div class="line1"><span class="name-blur" style="width:80px;"></span></div>
+                  <div class="line2"><span>Dodge</span> • <span>Standard</span></div>
+                </div>
+              </div>
+              <div class="qright">
+                <div class="state-pill">MO</div>
+                <div class="rate-pill">$30/mo</div>
+              </div>
+            </div>
+
+            <div class="quote-item">
+              <div class="qleft">
+                <div class="badge"><i class="fa-solid fa-car"></i></div>
+                <div class="qmeta">
+                  <div class="line1"><span class="name-blur" style="width:66px;"></span></div>
+                  <div class="line2"><span>Fiat</span> • <span>Basic</span></div>
+                </div>
+              </div>
+              <div class="qright">
+                <div class="state-pill">WI</div>
+                <div class="rate-pill">$33/mo</div>
+              </div>
+            </div>
+
+            <div class="quote-item">
+              <div class="qleft">
+                <div class="badge"><i class="fa-solid fa-car"></i></div>
+                <div class="qmeta">
+                  <div class="line1"><span class="name-blur" style="width:76px;"></span></div>
+                  <div class="line2"><span>Ford</span> • <span>Standard</span></div>
+                </div>
+              </div>
+              <div class="qright">
+                <div class="state-pill">TX</div>
+                <div class="rate-pill">$30/mo</div>
+              </div>
+            </div>
+
+            <div class="quote-item">
+              <div class="qleft">
+                <div class="badge"><i class="fa-solid fa-car"></i></div>
+                <div class="qmeta">
+                  <div class="line1"><span class="name-blur" style="width:84px;"></span></div>
+                  <div class="line2"><span>Genesis</span> • <span>Basic</span></div>
+                </div>
+              </div>
+              <div class="qright">
+                <div class="state-pill">NY</div>
+                <div class="rate-pill">$25/mo</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS (NEW DESIGN) -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Customer Reviews</h2>
+        <div class="hint">Swipe</div>
+      </div>
+
+      <div class="reviews-wrap">
+        <div class="reviews-top">
+          <div class="left">
+            <span class="stars" aria-label="5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </span>
+            <span style="font-weight:900;color:var(--muted);font-size:12px;">Trusted by drivers</span>
+          </div>
+          <div class="right">
+            <span class="vbadge"><i class="fa-solid fa-badge-check"></i> Verified</span>
+          </div>
+        </div>
+
+        <div class="reviews-rail" aria-label="Review carousel">
+
+          <div class="rslide">
+            <div class="rhead">
+              <span class="rchip"><i class="fa-solid fa-leaf"></i> Easy Savings</span>
+              <span class="stars" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </span>
+            </div>
+            <div class="rquote"><span class="qmark">“</span>Excellent coverage for less money. This is the smartest way to insure your car!</div>
+            <div class="rfoot">
+              <div class="avatar"><img src="https://quotediscountusa.com/images/download%20(4).jpeg" alt="Grace K"/></div>
+              <div class="rmeta">
+                <p class="name">Grace K</p>
+                <div class="sub"><i class="fa-solid fa-circle-check" style="color:var(--accent);"></i> Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rslide">
+            <div class="rhead">
+              <span class="rchip"><i class="fa-solid fa-bolt"></i> Fast Process</span>
+              <span class="stars" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </span>
+            </div>
+            <div class="rquote"><span class="qmark">“</span>The signup process was a breeze, and the savings are real. I’m recommending this to everyone!</div>
+            <div class="rfoot">
+              <div class="avatar"><img src="https://quotediscountusa.com/images/download%20(2).jpeg" alt="Emily B."/></div>
+              <div class="rmeta">
+                <p class="name">Emily B.</p>
+                <div class="sub"><i class="fa-solid fa-circle-check" style="color:var(--accent);"></i> Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rslide">
+            <div class="rhead">
+              <span class="rchip"><i class="fa-solid fa-shield-heart"></i> Great Service</span>
+              <span class="stars" aria-hidden="true">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </span>
+            </div>
+            <div class="rquote"><span class="qmark">“</span>Switching saved me money without compromising on service. Highly recommend!</div>
+            <div class="rfoot">
+              <div class="avatar"><img src="https://quotediscountusa.com/images/aca_hero_4.png" alt="Amy I."/></div>
+              <div class="rmeta">
+                <p class="name">Amy I.</p>
+                <div class="sub"><i class="fa-solid fa-circle-check" style="color:var(--accent);"></i> Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER (kept) -->
+    <footer>
+      <div class="foot">
+        <p style="margin:0;">
+          Disclaimer: savemaxauto is a top savings referral service which enables consumers to quickly and easily request multiple competitive insurance company quotes
+          from optimally selected local insurance agents and companies using our proprietary consumer alignment technology. We do not provide insurance and we do not
+          represent any specific insurance provider. Please note that lowest listed rates and potential savings may not be representative or available from all companies.
+          autoquotepilot.com matches users to advertisers and insurance agents only after we’ve received certain information from you, and your actual rates and savings will
+          vary based on your location, coverage limits, deductibles, driving records, type of vehicle, affiliations, and many other variables.
+        </p>
+
+        <div class="links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms Of Use</a>
+          <a href="mailto:contact@savemaxauto.org">contact@savemaxauto.org</a>
+          <a href="#">savemaxauto.org</a>
+          <a href="#" onclick="return false;">74 E Glenwood Ave Smyrna, DE 19977</a>
+        </div>
+      </div>
+    </footer>
+
+    <div style="height:16px;"></div>
+  </div>
+
+  <script>
+    // State line
+    async function setStateName(){
+      const el = document.getElementById("stateLine");
+      try{
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        const state = data.region || "Your State";
+        el.innerHTML = `Rates from <b>$19.99/mo</b> in <b>${state}</b>`;
+      }catch(e){
+        el.innerHTML = `Rates from <b>$19.99/mo</b> in Your State`;
+      }
+    }
+    setStateName();
+
+    // Scroll triggers -> question card
+    document.addEventListener("DOMContentLoaded", ()=>{
+      const triggers = document.querySelectorAll(".scroll-trigger");
+      const target = document.getElementById("questionCard");
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      triggers.forEach(el=>{
+        el.addEventListener("click", ()=>{
+          target?.scrollIntoView({behavior: prefersReduced ? "auto" : "smooth", block:"center"});
+          target?.animate?.(
+            [
+              { transform:"scale(1)", filter:"brightness(1)" },
+              { transform:"scale(1.015)", filter:"brightness(1.02)" },
+              { transform:"scale(1)", filter:"brightness(1)" }
+            ],
+            { duration: 420, easing: "ease-out" }
+          );
+        });
+      });
+    });
+
+    // Live quotes: clone items to loop, slow scroll
+    (function(){
+      const list = document.getElementById("liveList");
+      if(!list) return;
+
+      const items = Array.from(list.children);
+      items.forEach(i => list.appendChild(i.cloneNode(true)));
+
+      const perItem = 2.25;   // slow
+      const min = 45;
+      const t = Math.max(min, items.length * perItem);
+      list.style.setProperty("--scroll-time", t + "s");
+    })();
+
+    // Pause/Play live scrolling button
+    (function(){
+      const btn = document.getElementById("toggleLive");
+      const list = document.getElementById("liveList");
+      if(!btn || !list) return;
+
+      let paused = false;
+
+      btn.addEventListener("click", ()=>{
+        paused = !paused;
+        list.style.animationPlayState = paused ? "paused" : "running";
+        btn.innerHTML = paused ? '<i class="fa-solid fa-play"></i>' : '<i class="fa-solid fa-pause"></i>';
+      });
+    })();
+  </script>
+</body>
+</html>
