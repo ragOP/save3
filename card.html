@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoQuote Pilot - Blue Lander</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ugaqmwe991");
+  </script>
+
+  <style>
+    :root{
+      --blue:#0b63ad;
+      --blue-dark:#084f8a;
+      --blue-line:#4e8fd3;
+      --soft:#eef4fb;
+      --text:#0b1220;
+      --muted:#5b6575;
+      --card:#fff;
+      --line:#e5e7eb;
+      --orange:#f59e0b;
+      --inner:980px;
+
+      --radius:14px;
+      --shadowCard: 0 14px 34px rgba(2,6,23,.14);
+      --shadowSoft: 0 10px 24px rgba(2,6,23,.10);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      font-family: Inter, system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:#fff;
+    }
+    .page,.container{width:100%;}
+    .inner{max-width:var(--inner);margin:0 auto;padding:0 14px;}
+
+    /* =================== TOP SOCIAL BAR =================== */
+    .topbar{
+      background:#f6e8c9;
+      border-bottom:1px solid rgba(0,0,0,.06);
+      font-size:12px;
+      font-weight:900;
+      padding:8px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      position:sticky;
+      top:0;
+      z-index:50;
+      text-align:center;
+      white-space:nowrap;
+      overflow:hidden;
+    }
+    .topbar .faces{
+      height:22px;
+      width:auto;
+      border-radius:999px;
+      object-fit:cover;
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 6px 14px rgba(2,6,23,.10);
+    }
+
+    /* Tap targets */
+    .scroll-trigger{cursor:pointer; -webkit-tap-highlight-color: transparent;}
+    .scroll-trigger:active{transform:scale(.99);}
+
+    /* =================== HERO =================== */
+    .hero{
+      position:relative;
+      color:#fff;
+      background:
+        linear-gradient(0deg, rgba(11,99,173,.94), rgba(11,99,173,.94)),
+        url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center/cover no-repeat;
+      min-height:520px;
+      padding:18px 12px 0;
+      overflow:hidden;
+    }
+
+    .hero:before{
+      content:"";
+      position:absolute; inset:-60px -80px auto -80px;
+      height:220px;
+      background:radial-gradient(closest-side, rgba(253,224,71,.22), transparent 70%);
+      filter: blur(8px);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      max-width:520px;
+      margin:0 auto;
+      text-align:center;
+      padding-bottom:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero h1{
+      margin:10px 0 6px;
+      font-size:30px;
+      line-height:1.18;
+      font-weight:900;
+      letter-spacing:.2px;
+      text-shadow:0 2px 12px rgba(0,0,0,.26);
+    }
+    .hero .sub{
+      font-size:14.5px;
+      font-weight:900;
+      opacity:.98;
+      margin-top:18px;
+      margin-bottom:10px;
+      text-shadow:0 1px 7px rgba(0,0,0,.22);
+    }
+
+    .arrow-section{
+      text-align:center;
+      padding: 10px 0 14px 0;
+      color:#f1f1f3;
+      user-select:none;
+    }
+    .arrow-section i{
+      font-size: 2.5em;
+      animation: bounce 2s infinite;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
+    }
+    @keyframes bounce {
+      0%,20%,50%,80%,100% { transform: translateY(0); }
+      40% { transform: translateY(-0.3em); }
+      60% { transform: translateY(-0.15em); }
+    }
+
+    /* =================== QUESTION CARD =================== */
+    .q-card{
+      background:#fff;
+      color:#000;
+      border-radius:var(--radius);
+      padding:18px 12px 20px;
+      box-shadow: var(--shadowCard);
+      margin:10px auto 8px;
+      width:100%;
+      max-width:420px;
+      border:1px solid rgba(0,0,0,.08);
+      scroll-margin-top: 76px;
+    }
+    .q-title{
+      font-weight:900;
+      font-size:20px;
+      margin:2px 0 12px;
+      letter-spacing:.1px;
+    }
+    .q-btns{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .q-btn{
+      position:relative;
+      background:#fde047;
+      border:2px solid #0c0c0c;
+      border-radius:10px;
+      padding:14px 0;
+      font-weight:900;
+      font-size:22px;
+      cursor:pointer;
+      text-decoration:none;
+      color:inherit;
+      transition:transform .12s ease, filter .12s ease;
+      box-shadow:0 10px 18px rgba(2,6,23,.14);
+      overflow:hidden;
+    }
+    .q-btn:before{
+      content:"";
+      position:absolute;
+      inset:-40% -60%;
+      background: linear-gradient(115deg, transparent 0 35%, rgba(255,255,255,.65) 45%, transparent 55% 100%);
+      transform: translateX(-40%);
+      animation: shimmer 2.8s linear infinite;
+      opacity:.9;
+      pointer-events:none;
+    }
+    @keyframes shimmer{
+      0%{ transform: translateX(-55%); }
+      100%{ transform: translateX(55%); }
+    }
+    .q-btn:hover{filter:brightness(.98);}
+    .q-btn:active{transform:translateY(1px) scale(.99);}
+
+    .secure{
+      margin:14px 0 0;
+      font-size:11px;
+      font-weight:900;
+      opacity:.98;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .secure .lock{
+      width:12px; height:12px; border-radius:2px;
+      background:#fff; display:inline-block; position:relative; flex:0 0 auto;
+    }
+    .secure .lock:before{
+      content:"";
+      position:absolute; left:2px; right:2px; top:-5px; height:6px;
+      border:2px solid #fff; border-bottom:none; border-radius:7px 7px 0 0;
+    }
+
+    .hero-strip{
+      width:100%;
+      height:140px;
+      margin-top:12px;
+      background:url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center bottom/cover no-repeat;
+      opacity:.92;
+    }
+
+    /* =================== STORY SLIDER (INSTA-STYLE) =================== */
+    .stories-wrap{
+      background:#fff;
+      padding:10px 0 6px;
+      border-bottom:1px solid #eef2f7;
+    }
+    .stories-inner{padding:0 12px;}
+    .stories-head{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      max-width:620px;
+      margin:0 auto 8px;
+    }
+    .stories-head .title{
+      font-size:13px;
+      font-weight:900;
+      color:#0b1220;
+      display:flex; align-items:center; gap:8px;
+    }
+    .stories-head .hint{
+      font-size:12px;
+      font-weight:800;
+      color:var(--muted);
+      display:flex; align-items:center; gap:6px;
+      user-select:none;
+    }
+    .stories-head .hint i{opacity:.85;}
+
+    .story-viewport{
+      max-width:620px;
+      margin:0 auto;
+      border-radius:16px;
+      overflow:hidden;
+      background:#0b1220;
+      box-shadow: var(--shadowSoft);
+      position:relative;
+      touch-action: pan-y;
+    }
+
+    .story-progress{
+      position:absolute;
+      left:10px; right:10px; top:10px;
+      display:grid;
+      grid-template-columns: repeat(var(--pcount, 4), 1fr);
+      gap:6px;
+      z-index:3;
+      pointer-events:none;
+    }
+    .story-bar{
+      height:3px;
+      border-radius:999px;
+      background:rgba(255,255,255,.25);
+      overflow:hidden;
+    }
+    .story-bar > span{
+      display:block;
+      height:100%;
+      width:0%;
+      background:#fff;
+      border-radius:999px;
+      transition: width 80ms linear;
+    }
+
+    .story-track{
+      display:flex;
+      width:100%;
+      will-change: transform;
+      transition: transform 360ms cubic-bezier(.2,.9,.2,1);
+    }
+
+    .story{
+      min-width:100%;
+      aspect-ratio: 16 / 10; /* feels like story card */
+      position:relative;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      background:#0b1220;
+      color:#fff;
+    }
+
+    .story .bg{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1200px 400px at 50% 0%, rgba(253,224,71,.22), transparent 55%),
+        linear-gradient(180deg, rgba(11,99,173,.2), rgba(11,99,173,.85)),
+        url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center/cover no-repeat;
+      transform: scale(1.02);
+      filter:saturate(1.08);
+    }
+    .story .bg.alt1{
+      background:
+        radial-gradient(900px 360px at 50% 0%, rgba(255,255,255,.14), transparent 55%),
+        linear-gradient(180deg, rgba(8,79,138,.2), rgba(8,79,138,.9)),
+        url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center/cover no-repeat;
+    }
+    .story .bg.alt2{
+      background:
+        radial-gradient(900px 360px at 20% 10%, rgba(253,224,71,.18), transparent 60%),
+        linear-gradient(180deg, rgba(11,99,173,.18), rgba(11,99,173,.92)),
+        url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center/cover no-repeat;
+    }
+    .story .bg.alt3{
+      background:
+        radial-gradient(900px 360px at 80% 10%, rgba(253,224,71,.18), transparent 60%),
+        linear-gradient(180deg, rgba(8,79,138,.18), rgba(8,79,138,.92)),
+        url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center/cover no-repeat;
+    }
+
+    .story .content{
+      position:relative;
+      z-index:2;
+      width:100%;
+      padding:16px 14px 14px;
+      text-align:left;
+    }
+    .story .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.2px;
+      user-select:none;
+    }
+    .story h3{
+      margin:10px 0 6px;
+      font-size:20px;
+      line-height:1.2;
+      font-weight:900;
+      text-shadow:0 10px 24px rgba(0,0,0,.35);
+    }
+    .story p{
+      margin:0;
+      font-size:13px;
+      font-weight:800;
+      color:rgba(255,255,255,.92);
+      line-height:1.35;
+      max-width:28ch;
+      text-shadow:0 8px 18px rgba(0,0,0,.28);
+    }
+
+    .story-actions{
+      position:absolute;
+      inset:0;
+      z-index:4;
+      display:flex;
+    }
+    .story-actions button{
+      flex:1;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .story-actions button:active{background:rgba(255,255,255,.04);}
+
+    .story-footer{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      margin-top:12px;
+    }
+    .story-cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#fde047;
+      color:#0b1220;
+      font-weight:950;
+      font-size:13px;
+      text-decoration:none;
+      border:2px solid rgba(12,12,12,.88);
+      box-shadow:0 12px 24px rgba(2,6,23,.20);
+      white-space:nowrap;
+    }
+    .story-cta i{font-size:12px;}
+    .story-meta{
+      font-size:12px;
+      font-weight:900;
+      color:rgba(255,255,255,.85);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      user-select:none;
+    }
+    .dot{
+      width:4px; height:4px; border-radius:99px; background:rgba(255,255,255,.6);
+    }
+
+    /* =================== TRUST STRIP =================== */
+    .trust-wrap{
+      background:#fff;
+      padding:10px 0;
+      border-bottom:1px solid #eef2f7;
+    }
+    .trust-row{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      padding:4px 12px;
+      overflow-x:auto;
+      scrollbar-width:none;
+    }
+    .trust-row::-webkit-scrollbar{display:none;}
+    .trust{
+      min-width:140px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center;
+      font-size:11px;
+      font-weight:900;
+      color:#0b1220;
+      gap:3px;
+      white-space:nowrap;
+    }
+    .trust .logo{
+      height:24px; display:flex; align-items:center; justify-content:center;
+    }
+    .trust img{height:24px; width:auto; object-fit:contain;}
+    .trust small{font-size:9.5px; color:var(--muted); font-weight:900;}
+
+    /* =================== REALTIME QUOTES =================== */
+    .section{padding:12px 0; background:#fff;}
+    .section h2{
+      text-align:center; font-size:20px; font-weight:950; margin:6px 0 10px;
+    }
+
+    .quotes-card{
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      max-width:520px;
+      margin:0 auto;
+      background:#fff;
+      box-shadow:0 10px 22px rgba(15,23,42,.08);
+    }
+    .quotes-head{
+      background:var(--blue);
+      color:#fff;
+      font-weight:950;
+      font-size:12px;
+      padding:10px 10px;
+      display:grid;
+      grid-template-columns:1.2fr 1fr .8fr .8fr;
+      gap:6px;
+    }
+
+    .quotes-viewport{
+      position:relative;
+      height:260px;
+      overflow:hidden;
+      background:#fff;
+    }
+    .quotes-body{
+      display:block;
+      will-change:transform;
+      animation: quotesScroll linear infinite;
+      animation-duration: var(--scroll-time, 60s);
+    }
+
+    @keyframes quotesScroll{
+      from{ transform: translateY(0); }
+      to{ transform: translateY(-50%); }
+    }
+
+    .quotes-row{
+      display:grid;
+      grid-template-columns:1.2fr 1fr .8fr .8fr;
+      gap:6px;
+      padding:12px 10px;
+      font-size:13px;
+      align-items:center;
+      border-top:1px solid var(--line);
+    }
+    .quotes-row:nth-child(even){background:#f7f9fc;}
+    .blur{
+      height:12px; width:70%;
+      background:linear-gradient(90deg,#d1d5db,#eef2f7);
+      border-radius:999px;
+    }
+    .rate{font-weight:950; text-align:right;}
+    .quotes-viewport:hover .quotes-body{ animation-play-state:paused; }
+
+    /* =================== REVIEWS =================== */
+    .reviews{
+      background:#f2f7fb;
+      padding:14px 0 6px;
+    }
+    .reviews .lead{
+      text-align:center;
+      font-size:12.5px;
+      color:#111827;
+      margin:0 18px 12px;
+      font-weight:750;
+      line-height:1.35;
+    }
+    .r-card{
+      background:#fff;
+      border:2px solid var(--blue-line);
+      border-radius:14px;
+      padding:14px 12px;
+      max-width:520px;
+      margin:12px auto;
+      box-shadow:0 10px 22px rgba(15,23,42,.06);
+    }
+    .r-stars{display:flex; gap:3px; margin-bottom:6px;}
+    .r-star{
+      width:14px;height:14px;
+      background:conic-gradient(from 0deg,var(--orange) 0 100%);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 67% 57%, 79% 91%, 50% 70%, 21% 91%, 33% 57%, 2% 35%, 39% 35%);
+    }
+    .r-quote{
+      font-size:13px; font-weight:750; color:#0b1220; line-height:1.5;
+      margin-bottom:12px;
+    }
+    .r-user{
+      display:flex; align-items:center; gap:10px;
+    }
+    .r-avatar{
+      width:46px;height:46px;border-radius:999px; overflow:hidden;
+      background:#e5e7eb; flex:0 0 auto;
+      border:2px solid #fff;
+      box-shadow:0 2px 6px rgba(0,0,0,.1);
+    }
+    .r-avatar img{width:100%;height:100%;object-fit:cover;}
+    .r-name{font-weight:950; font-size:13px;}
+    .r-verified{
+      font-size:11px; font-weight:950; color:#16a34a; display:flex; align-items:center; gap:5px;
+      margin-top:2px;
+    }
+    .check{
+      width:14px;height:14px;border-radius:999px;background:#16a34a;color:#fff;
+      display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:950;
+    }
+
+    /* =================== FOOTER =================== */
+    footer{
+      padding:14px 0 26px;
+      font-size:10.5px;
+      color:#374151;
+      line-height:1.45;
+      text-align:center;
+      background:#fff;
+      border-top:1px solid #eef2f7;
+    }
+    footer a{color:#111827;text-decoration:none;font-weight:900;}
+    footer .links{
+      margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font-weight:900;
+    }
+
+    /* Better mobile spacing */
+    @media (max-width: 420px){
+      .hero{min-height:500px;}
+      .hero h1{font-size:28px;}
+      .hero .sub{font-size:14px;}
+      .q-btn{font-size:20px;}
+      .story h3{font-size:19px;}
+    }
+
+    @media (min-width: 900px){
+      .hero{
+        min-height:720px;
+        padding-top:34px;
+        background:
+          linear-gradient(0deg, rgba(11,99,173,.94), rgba(11,99,173,.94)),
+          url("https://s.autoquotepilot.com/V4-rfv-opf-5/images/banner-img.jpg") center/cover no-repeat;
+      }
+      .hero-inner{max-width:1100px;padding-top:20px;}
+      .hero h1{font-size:44px; line-height:1.12;}
+      .hero .sub{font-size:17px; margin-bottom:18px;}
+
+      .q-card{max-width:620px; border-radius:16px; padding:18px 16px;}
+      .q-title{font-size:20px;}
+      .q-btn{font-size:18px; padding:14px 0;}
+      .secure{font-size:13px;}
+
+      .story-viewport{max-width:720px;}
+      .quotes-card, .r-card{max-width:750px;}
+      .section h2{font-size:22px;}
+      .quotes-viewport{height:300px;}
+
+      .trust-row{
+        max-width:900px;
+        margin:0 auto;
+        justify-content:space-between;
+        overflow:visible;
+      }
+    }
+  </style>
+
+  <script>
+    async function setStateName() {
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        const data = await res.json();
+        let state = data.region || "Your State";
+
+        const subEl = document.querySelector(".hero .sub");
+        if (subEl) subEl.innerHTML = `Rates Starting At $19.99 Per Month In <b>${state}</b>`;
+
+        // also inject in story copy
+        const st = document.querySelector('[data-story-state]');
+        if (st) st.textContent = state;
+      } catch (e) {
+        console.warn("Location lookup failed");
+        const subEl = document.querySelector(".hero .sub");
+        if (subEl) subEl.innerHTML = `Rates Starting At $19.99 Per Month In Your State`;
+      }
+    }
+    setStateName();
+  </script>
+
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+  var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+  ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D2H5NABC77UCCBANISK0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PL5B9NSD');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <script type="text/javascript" src="https://trk.reliableautopolicy.com/track.js?rtkcmpid=692430d43ce7194f6210e962"></script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PL5B9NSD"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <div class="page">
+    <main class="container">
+
+      <!-- TOP BAR -->
+      <div class="topbar">
+        <span>60,754 Americans Saved On Auto Insurance</span>
+        <img class="faces" src="https://autoquotepilot.com/aksh/v1/review-faces.png" alt="recent users"/>
+      </div>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-inner">
+          <h1 class="scroll-trigger">Get back <span style="color:#fde047;">$710</span> In Savings<br/>On Your Auto Insurance</h1>
+          <div class="sub scroll-trigger">Rates Starting At $19.99 Per Month In America</div>
+
+          <div class="arrow-section scroll-trigger" aria-label="Scroll to question">
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+
+          <!-- QUESTION CARD (SCROLL TARGET) -->
+          <div class="q-card" id="questionCard">
+            <div class="q-title">Are You Currently Insured?</div>
+            <div class="q-btns">
+              <a class="q-btn" href="https://trk.reliableautopolicy.com/click" role="button">YES</a>
+              <a class="q-btn" href="https://trk.reliableautopolicy.com/click" role="button">NO</a>
+            </div>
+          </div>
+
+          <div class="secure">
+            <span class="lock"></span>
+            <span>We keep all your information 100% secure &amp; confidential, always.</span>
+          </div>
+        </div>
+
+        <div class="hero-strip" aria-hidden="true"></div>
+      </section>
+
+      <!-- INSTA STORY STYLE (AUTO-SLIDE EVERY 3s + SWIPE) -->
+      <section class="stories-wrap" aria-label="Quick stories">
+        <div class="stories-inner">
+          <div class="stories-head">
+            <div class="title">
+              <i class="fa-solid fa-circle-play" aria-hidden="true"></i>
+              <span>Quick Steps</span>
+            </div>
+            <div class="hint">
+              <span>Swipe</span>
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="story-viewport" id="storyViewport">
+            <div class="story-progress" id="storyProgress" style="--pcount:4">
+              <div class="story-bar"><span></span></div>
+              <div class="story-bar"><span></span></div>
+              <div class="story-bar"><span></span></div>
+              <div class="story-bar"><span></span></div>
+            </div>
+
+            <!-- Tap zones like Instagram (left/right) -->
+            <div class="story-actions" aria-hidden="true">
+              <button type="button" id="storyPrev" aria-label="Previous story"></button>
+              <button type="button" id="storyNext" aria-label="Next story"></button>
+            </div>
+
+            <div class="story-track" id="storyTrack">
+              <!-- Story 1 -->
+              <article class="story" data-story="0">
+                <div class="bg alt1"></div>
+                <div class="content">
+                  <div class="pill"><i class="fa-solid fa-hand-sparkles"></i> Welcome</div>
+                  <h3>Let’s find your best rate.</h3>
+                  <p>Answer 1 quick question and we match you to offers near you.</p>
+
+                  <div class="story-footer">
+                    <div class="story-meta">
+                      <span>Auto Insurance</span><span class="dot"></span><span>3 sec</span>
+                    </div>
+                    <a class="story-cta scroll-trigger" href="#questionCard">
+                      Start <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Story 2 -->
+              <article class="story" data-story="1">
+                <div class="bg alt2"></div>
+                <div class="content">
+                  <div class="pill"><i class="fa-solid fa-location-dot"></i> Location</div>
+                  <h3>Rates in <span data-story-state>Your State</span></h3>
+                  <p>We show prices based on your area and available carriers.</p>
+
+                  <div class="story-footer">
+                    <div class="story-meta">
+                      <span>Personalized</span><span class="dot"></span><span>3 sec</span>
+                    </div>
+                    <a class="story-cta scroll-trigger" href="#questionCard">
+                      Continue <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Story 3 -->
+              <article class="story" data-story="2">
+                <div class="bg alt3"></div>
+                <div class="content">
+                  <div class="pill"><i class="fa-solid fa-shield-halved"></i> Secure</div>
+                  <h3>Your info stays protected.</h3>
+                  <p>We keep everything confidential and only use it to match offers.</p>
+
+                  <div class="story-footer">
+                    <div class="story-meta">
+                      <span>Trusted</span><span class="dot"></span><span>3 sec</span>
+                    </div>
+                    <a class="story-cta scroll-trigger" href="#questionCard">
+                      Next <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Story 4 -->
+              <article class="story" data-story="3">
+                <div class="bg"></div>
+                <div class="content">
+                  <div class="pill"><i class="fa-solid fa-bolt"></i> Ready?</div>
+                  <h3>Tap YES or NO.</h3>
+                  <p>That’s it — you’re seconds away from your best match.</p>
+
+                  <div class="story-footer">
+                    <div class="story-meta">
+                      <span>Fast</span><span class="dot"></span><span>3 sec</span>
+                    </div>
+                    <a class="story-cta scroll-trigger" href="#questionCard">
+                      Go to Question <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TRUST STRIP -->
+      <div class="trust-wrap">
+        <div class="trust-row">
+          <div class="trust">
+            <div class="logo">
+              <img src="https://s.autoquotepilot.com/V4-rfv-opf-5/images/rate_icon1.png" style="width:90px;height:24px;border-radius:4px;" alt="rating logo 1"/>
+            </div>
+            <small>Based on 6,000+ Reviews</small>
+          </div>
+
+          <div class="trust">
+            <div class="logo">
+              <img src="https://s.autoquotepilot.com/V4-rfv-opf-5/images/rate_icon2.png" style="width:90px;height:24px;border-radius:4px;" alt="rating logo 2"/>
+            </div>
+            <small>Based on 31,000+ Reviews</small>
+          </div>
+
+          <div class="trust">
+            <div class="logo">
+              <img src="https://s.autoquotepilot.com/V4-rfv-opf-5/images/rate_icon3.png" style="width:90px;height:24px;border-radius:4px;" alt="rating logo 3"/>
+            </div>
+            <small>Based on 22,000+ Reviews</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- REAL-TIME QUOTES -->
+      <section class="section">
+        <div class="inner">
+          <h2>Real-Time Quotes</h2>
+
+          <div class="quotes-card">
+            <div class="quotes-head">
+              <div>Name</div><div>Model</div><div>State</div><div style="text-align:right;">Rate</div>
+            </div>
+
+            <div class="quotes-viewport" id="quotesViewport">
+              <div class="quotes-body" id="quotesBody">
+                <div class="quotes-row">
+                  <div><div class="blur"></div></div>
+                  <div>Chrysler</div>
+                  <div>MT</div>
+                  <div class="rate">$32/mo</div>
+                </div>
+                <div class="quotes-row">
+                  <div><div class="blur" style="width:55%"></div></div>
+                  <div>Ford</div>
+                  <div>NC</div>
+                  <div class="rate">$29/mo</div>
+                </div>
+                <div class="quotes-row">
+                  <div><div class="blur" style="width:60%"></div></div>
+                  <div>Dodge</div>
+                  <div>MO</div>
+                  <div class="rate">$30/mo</div>
+                </div>
+                <div class="quotes-row">
+                  <div><div class="blur" style="width:50%"></div></div>
+                  <div>Fiat</div>
+                  <div>WI</div>
+                  <div class="rate">$33/mo</div>
+                </div>
+                <div class="quotes-row">
+                  <div><div class="blur" style="width:65%"></div></div>
+                  <div>Ford</div>
+                  <div>TX</div>
+                  <div class="rate">$30/mo</div>
+                </div>
+                <div class="quotes-row">
+                  <div><div class="blur" style="width:58%"></div></div>
+                  <div>Genesis</div>
+                  <div>NY</div>
+                  <div class="rate">$25/mo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- CUSTOMER REVIEWS -->
+      <section class="reviews">
+        <div class="inner">
+          <h2 style="margin-top:0;">Customer Reviews</h2>
+          <p class="lead">
+            Real feedback from real drivers. Learn how we’ve helped our customers save on auto insurance.
+          </p>
+
+          <div class="r-card">
+            <div class="r-stars">
+              <span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span>
+            </div>
+            <div class="r-quote">
+              "Excellent coverage for less money. This is the smartest way to insure your car!"
+            </div>
+            <div class="r-user">
+              <div class="r-avatar">
+                <img src="https://quotediscountusa.com/images/download%20(4).jpeg" alt="Grace K">
+              </div>
+              <div>
+                <div class="r-name">Grace K</div>
+                <div class="r-verified"><span class="check">✓</span> Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-card">
+            <div class="r-stars">
+              <span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span>
+            </div>
+            <div class="r-quote">
+              "The signup process was a breeze, and the savings are real. I'm recommending this to everyone!"
+            </div>
+            <div class="r-user">
+              <div class="r-avatar">
+                <img src="https://quotediscountusa.com/images/download%20(2).jpeg" alt="Emily B.">
+              </div>
+              <div>
+                <div class="r-name">Emily B.</div>
+                <div class="r-verified"><span class="check">✓</span> Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="r-card">
+            <div class="r-stars">
+              <span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span>
+            </div>
+            <div class="r-quote">
+              "Switching to this insurance saved me money without compromising on service. Highly recommend!"
+            </div>
+            <div class="r-user">
+              <div class="r-avatar">
+                <img src="https://quotediscountusa.com/images/aca_hero_4.png" alt="Amy I.">
+              </div>
+              <div>
+                <div class="r-name">Amy I.</div>
+                <div class="r-verified"><span class="check">✓</span> Verified Buyer</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="inner">
+          <p>
+            Disclaimer: savemaxauto is a top savings referral service which enables consumers to quickly and easily request multiple competitive insurance company quotes from optimally selected local insurance agents and companies using our proprietary consumer alignment technology. We do not provide insurance and we do not represent any specific insurance provider. Please note that lowest listed rates and potential savings may not be representative or available from all companies. autoquotepilot.com matches users to advertisers and insurance agents only after we’ve received certain information from you, and your actual rates and savings will vary based on your location, coverage limits, deductibles, driving records, type of vehicle, affiliations, and many other variables.
+          </p>
+          <div class="links">
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms Of Use</a> |
+            <a href="mailto:contact@savemaxauto.org">contact@savemaxauto.org</a> |
+            <a href="#">savemaxauto.org</a> |
+            <span>74 E Glenwood Ave Smyrna, DE 19977</span>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- SLOW vertical scroll JS (quotes) -->
+  <script>
+    (function(){
+      const body = document.getElementById("quotesBody");
+      if(!body) return;
+
+      const rows = Array.from(body.children);
+      rows.forEach(r => body.appendChild(r.cloneNode(true)));
+
+      const perRowSeconds = 2;
+      const minSeconds = 40;
+      const time = Math.max(minSeconds, rows.length * perRowSeconds);
+
+      body.style.setProperty("--scroll-time", time + "s");
+    })();
+  </script>
+
+  <!-- CLICK HERO/HEADLINE/ARROW => SMOOTH SCROLL TO QUESTION CARD -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const triggers = document.querySelectorAll(".scroll-trigger");
+      const target = document.getElementById("questionCard");
+      if (!target) return;
+
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      triggers.forEach(el => {
+        el.addEventListener("click", () => {
+          target.scrollIntoView({
+            behavior: prefersReduced ? "auto" : "smooth",
+            block: "center"
+          });
+
+          target.animate?.(
+            [
+              { transform: "scale(1)", boxShadow: "0 14px 34px rgba(2,6,23,.14)" },
+              { transform: "scale(1.01)", boxShadow: "0 18px 42px rgba(2,6,23,.18)" },
+              { transform: "scale(1)", boxShadow: "0 14px 34px rgba(2,6,23,.14)" }
+            ],
+            { duration: 420, easing: "ease-out" }
+          );
+        });
+      });
+    });
+  </script>
+
+  <!-- INSTA STORY SLIDER: auto-advance every 3s + swipe left/right -->
+  <script>
+    (function(){
+      const viewport = document.getElementById("storyViewport");
+      const track = document.getElementById("storyTrack");
+      const progressWrap = document.getElementById("storyProgress");
+      const bars = progressWrap ? Array.from(progressWrap.querySelectorAll(".story-bar > span")) : [];
+      const btnPrev = document.getElementById("storyPrev");
+      const btnNext = document.getElementById("storyNext");
+
+      if(!viewport || !track) return;
+
+      const slides = Array.from(track.querySelectorAll(".story"));
+      const count = slides.length;
+
+      let index = 0;
+      let timer = null;
+      let startTs = 0;
+      let paused = false;
+
+      const DURATION = 3000; // 3 seconds
+
+      function clamp(i){
+        if(i < 0) return count - 1;
+        if(i >= count) return 0;
+        return i;
+      }
+
+      function setIndex(i, {animate=true} = {}){
+        index = clamp(i);
+        track.style.transition = animate ? "transform 360ms cubic-bezier(.2,.9,.2,1)" : "none";
+        track.style.transform = "translateX(" + (-index * 100) + "%)";
+        resetBars();
+        startTs = performance.now();
+      }
+
+      function resetBars(){
+        for(let i=0;i<bars.length;i++){
+          if(i < index) bars[i].style.width = "100%";
+          else bars[i].style.width = "0%";
+        }
+      }
+
+      function tick(now){
+        if(paused){
+          requestAnimationFrame(tick);
+          return;
+        }
+        const elapsed = now - startTs;
+        const pct = Math.max(0, Math.min(1, elapsed / DURATION));
+        if(bars[index]) bars[index].style.width = (pct * 100).toFixed(2) + "%";
+
+        if(elapsed >= DURATION){
+          setIndex(index + 1);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function pause(){
+        paused = true;
+      }
+      function resume(){
+        if(!paused) return;
+        paused = false;
+        // restart timing to feel natural after resume
+        startTs = performance.now();
+        resetBars();
+      }
+
+      // Buttons (tap zones)
+      btnPrev?.addEventListener("click", () => setIndex(index - 1));
+      btnNext?.addEventListener("click", () => setIndex(index + 1));
+
+      // Press and hold to pause (like stories)
+      viewport.addEventListener("pointerdown", (e) => {
+        // allow swipe detection below, but pause while finger down
+        pause();
+      }, {passive:true});
+      window.addEventListener("pointerup", () => resume(), {passive:true});
+      window.addEventListener("pointercancel", () => resume(), {passive:true});
+
+      // Swipe support
+      let sx = 0, sy = 0, dragging = false, moved = false;
+
+      viewport.addEventListener("touchstart", (e) => {
+        if(!e.touches || !e.touches[0]) return;
+        sx = e.touches[0].clientX;
+        sy = e.touches[0].clientY;
+        dragging = true;
+        moved = false;
+        // pause already handled by pointerdown on many browsers, but keep safe:
+        pause();
+      }, {passive:true});
+
+      viewport.addEventListener("touchmove", (e) => {
+        if(!dragging || !e.touches || !e.touches[0]) return;
+        const dx = e.touches[0].clientX - sx;
+        const dy = e.touches[0].clientY - sy;
+        if(Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) moved = true;
+      }, {passive:true});
+
+      viewport.addEventListener("touchend", (e) => {
+        if(!dragging) return;
+        dragging = false;
+
+        // If it was a swipe, decide direction
+        if(e.changedTouches && e.changedTouches[0]){
+          const ex = e.changedTouches[0].clientX;
+          const dx = ex - sx;
+
+          const SWIPE = 42;
+          if(moved && dx <= -SWIPE) setIndex(index + 1);
+          else if(moved && dx >= SWIPE) setIndex(index - 1);
+          else {
+            // no swipe: keep current (tap zones handle next/prev)
+            startTs = performance.now();
+            resetBars();
+          }
+        }
+
+        resume();
+      }, {passive:true});
+
+      // Keyboard (desktop)
+      window.addEventListener("keydown", (e) => {
+        if(e.key === "ArrowRight") setIndex(index + 1);
+        if(e.key === "ArrowLeft") setIndex(index - 1);
+      });
+
+      // Hover pause on desktop
+      viewport.addEventListener("mouseenter", pause);
+      viewport.addEventListener("mouseleave", resume);
+
+      // Init
+      setIndex(0, {animate:false});
+      startTs = performance.now();
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
