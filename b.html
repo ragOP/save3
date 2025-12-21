@@ -1,519 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Auto Insurance Quiz (Mobile)</title>
-  <style>
-    :root{
-      --bg:#ffffff;
-      --card:#ffffff;
-      --border:#d7dde3;
-      --text:#0b1220;
-      --muted:#6b7280;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto Insurance Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
 
-      --green:#1f5a45;          /* calm finance green */
-      --green-2:#184b3a;
-      --green-dot:#1f8a5c;
+        --text: #0f172a;
+        --muted: #6b7280;
+        --line: #e5e7eb;
 
-      --strip:#eef2f6;          /* info bar bg */
-      --strip2:#fff7db;         /* subtle yellow */
-      --blue:#0b63ad;
+        --green: #0f3d2e;
+        --green2: #145a42;
 
-      --shadow: 0 14px 34px rgba(2,6,23,.08);
-      --shadow-btn: 0 10px 18px rgba(2,6,23,.16);
-      --radius: 22px;
-      --radius-btn: 18px;
+        /* Better-looking red gradients (not loud neon) */
+        --redA: #b42318; /* deep red */
+        --redB: #d92d20; /* richer red */
+        --redC: #f04438; /* highlight */
+        --redShadow: rgba(185, 28, 28, 0.22);
 
-      --max: 420px;
-      --pad: 18px;
-      --pad-lg: 22px;
-    }
+        --cardBorder: #e6e8ee;
+        --cardShadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:22px 14px;
-    }
-
-    /* ===== PAGE WRAP ===== */
-    .wrap{
-      width:min(var(--max), 100%);
-      margin:auto;
-    }
-
-    /* ===== CARD ===== */
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-
-    .inner{
-      padding:18px 18px 16px;
-    }
-
-    /* ===== HEADER ===== */
-    .header{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:8px;
-      padding:18px 18px 14px;
-      text-align:center;
-    }
-
-    .brandRow{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      line-height:1;
-    }
-
-    .brand{
-      font-weight:800;
-      letter-spacing:.2px;
-      font-size:20px;
-      color:#111827;
-    }
-
-    .sub{
-      font-size:12.5px;
-      color:var(--muted);
-      margin-top:-2px;
-    }
-
-    .divider{
-      height:1px;
-      background:#e7edf3;
-      margin:0 18px;
-    }
-
-    /* ===== STATUS STRIP ===== */
-    .status{
-      margin:14px 18px 0;
-      border-radius:12px;
-      padding:10px 12px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      background:var(--strip2);
-      border:1px solid #f1e5b5;
-      color:#1f2937;
-    }
-
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--green-dot);
-      box-shadow: 0 0 0 4px rgba(31,138,92,.12);
-      flex:0 0 auto;
-    }
-
-    .statusText{
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:.1px;
-    }
-    .statusText .live{
-      color:#b91c1c;
-      font-weight:900;
-      margin-right:4px;
-    }
-
-    /* ===== HEADLINE ===== */
-    .hero{
-      padding:18px 18px 0;
-      text-align:center;
-    }
-
-    .h1{
-      margin:12px 0 8px;
-      font-size:30px;
-      line-height:1.14;
-      letter-spacing:-.5px;
-      font-weight:900;
-      color:#0b1220;
-    }
-
-    .emphGreen{
-      color:var(--green);
-      font-weight:900;
-      position:relative;
-      display:inline-block;
-    }
-
-    /* shimmer on highlighted parts + "Drivers..." line */
-    .shimmerText{
-      position:relative;
-      display:inline-block;
-      padding:2px 2px;
-      border-radius:10px;
-      isolation:isolate;
-    }
-    .shimmerText::after{
-      content:"";
-      position:absolute;
-      inset:-6px -18px;
-      background:linear-gradient(
-        115deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0) 35%,
-        rgba(255,255,255,.55) 50%,
-        rgba(255,255,255,0) 65%,
-        rgba(255,255,255,0) 100%
-      );
-      transform:translateX(-120%);
-      animation: shimmerSweep 1.65s linear infinite;
-      pointer-events:none;
-      z-index:2;
-      mix-blend-mode:screen;
-    }
-
-    /* zoom-in + fade-out “flash” on headline line */
-    .flashZoom{
-      position:relative;
-      display:inline-block;
-      isolation:isolate;
-    }
-    .flashZoom::before{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:55%;
-      width:86%;
-      height:80%;
-      transform:translate(-50%,-50%) scale(.92);
-      border-radius:999px;
-      background:radial-gradient(closest-side, rgba(31,90,69,.18), rgba(31,90,69,0));
-      opacity:0;
-      pointer-events:none;
-      z-index:-1;
-      animation: zoomFade 2.2s ease-in-out infinite;
-    }
-
-    .support{
-      margin:0 0 14px;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.35;
-    }
-
-    .line{
-      height:1px;
-      background:#e7edf3;
-      margin:12px 18px 0;
-    }
-
-    /* ===== QUESTION ===== */
-    .q{
-      text-align:center;
-      padding:16px 18px 0;
-      font-weight:900;
-      font-size:20px;
-      letter-spacing:-.2px;
-      color:#0b1220;
-    }
-
-    /* ===== BUTTONS ===== */
-    .btnWrap{
-      padding:14px 18px 0;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-
-    .btn{
-      width:100%;
-      border:none;
-      border-radius:var(--radius-btn);
-      padding:16px 14px;
-      font-weight:900;
-      font-size:18px;
-      letter-spacing:.5px;
-      color:#fff;
-      background:var(--green);
-      box-shadow: var(--shadow-btn);
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-      transform:translateZ(0);
-      -webkit-tap-highlight-color: transparent;
-      outline: none;
-    }
-    .btn:active{
-      transform:translateY(1px) scale(.99);
-      box-shadow: 0 7px 14px rgba(2,6,23,.16);
-    }
-    .btn.secondary{
-      background:var(--green-2);
-    }
-
-    /* HEAVY shimmer on options */
-    .btn::after{
-      content:"";
-      position:absolute;
-      top:-40%;
-      left:-120%;
-      width:70%;
-      height:180%;
-      background:linear-gradient(
-        115deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0) 35%,
-        rgba(255,255,255,.55) 50%,
-        rgba(255,255,255,0) 65%,
-        rgba(255,255,255,0) 100%
-      );
-      transform:skewX(-18deg);
-      animation: btnShimmer 1.25s linear infinite;
-      pointer-events:none;
-      opacity:.95;
-      mix-blend-mode:screen;
-    }
-
-    /* zoom-in fade-out “spot flash” on buttons */
-    .btn::before{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:40px;
-      height:40px;
-      border-radius:999px;
-      transform:translate(-50%,-50%) scale(.6);
-      background:radial-gradient(closest-side, rgba(255,255,255,.55), rgba(255,255,255,0));
-      opacity:0;
-      pointer-events:none;
-      animation: btnZoomFade 1.6s ease-in-out infinite;
-      filter: blur(.2px);
-    }
-
-    .trustRow{
-      padding:12px 18px 0;
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      color:var(--muted);
-      font-size:12.5px;
-    }
-    .trustRow span{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-    .bullet{
-      width:5px;height:5px;border-radius:999px;background:#cbd5e1;
-    }
-
-    /* ===== TESTIMONIAL ===== */
-    .testi{
-      margin:14px 18px 0;
-      border:1px solid #e6ecf2;
-      border-radius:16px;
-      padding:12px 12px;
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      background:#fff;
-    }
-    .avatar{
-      width:44px;height:44px;border-radius:999px;
-      background:#eef2f6;
-      border:1px solid #dde5ee;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#94a3b8;
-      font-weight:800;
-      flex:0 0 auto;
-    }
-    .tText{
-      font-size:13.5px;
-      color:#111827;
-      line-height:1.35;
-      margin-top:2px;
-    }
-    .tMeta{
-      margin-top:8px;
-      font-size:12px;
-      color:var(--muted);
-      font-weight:700;
-    }
-
-    /* ===== FOOTER ===== */
-    .foot{
-      padding:14px 18px 18px;
-      text-align:center;
-      font-size:11.5px;
-      color:#9aa4b2;
-      line-height:1.35;
-    }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes shimmerSweep{
-      0%{ transform:translateX(-120%) }
-      100%{ transform:translateX(120%) }
-    }
-
-    @keyframes btnShimmer{
-      0%{ left:-120% }
-      100%{ left:140% }
-    }
-
-    /* zoom in + fade out */
-    @keyframes zoomFade{
-      0%{ opacity:0; transform:translate(-50%,-50%) scale(.92) }
-      30%{ opacity:1; transform:translate(-50%,-50%) scale(1.03) }
-      60%{ opacity:.0; transform:translate(-50%,-50%) scale(1.10) }
-      100%{ opacity:0; transform:translate(-50%,-50%) scale(1.10) }
-    }
-
-    @keyframes btnZoomFade{
-      0%{ opacity:0; transform:translate(-50%,-50%) scale(.35) }
-      20%{ opacity:.75; transform:translate(-50%,-50%) scale(1.35) }
-      50%{ opacity:0; transform:translate(-50%,-50%) scale(2.35) }
-      100%{ opacity:0; transform:translate(-50%,-50%) scale(2.35) }
-    }
-
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce){
-      .shimmerText::after,
-      .flashZoom::before,
-      .btn::after,
-      .btn::before{
-        animation:none !important;
+        --radius: 18px;
       }
-      .btn:active{ transform:none; }
-    }
-  </style>
-</head>
 
-<body>
-  <main class="wrap" aria-label="Auto insurance savings quiz">
-    <section class="card" role="region" aria-label="Quiz card">
-      <!-- HEADER -->
-      <header class="header">
-        <div class="brandRow">
-          <!-- simple inline USA flag icon (generic) -->
-          <svg width="28" height="18" viewBox="0 0 28 18" aria-hidden="true">
-            <rect x="0" y="0" width="28" height="18" rx="2" fill="#fff" stroke="#D1D5DB"/>
-            <rect x="0.5" y="0.5" width="27" height="17" rx="2" fill="#fff"/>
-            <!-- red stripes -->
-            <rect x="1" y="2" width="26" height="1.6" fill="#B91C1C"/>
-            <rect x="1" y="5" width="26" height="1.6" fill="#B91C1C"/>
-            <rect x="1" y="8" width="26" height="1.6" fill="#B91C1C"/>
-            <rect x="1" y="11" width="26" height="1.6" fill="#B91C1C"/>
-            <rect x="1" y="14" width="26" height="1.6" fill="#B91C1C"/>
-            <!-- blue canton -->
-            <rect x="1" y="1.2" width="11" height="7.2" fill="#1D4ED8"/>
-            <!-- “stars” dots -->
-            <g fill="#fff" opacity="0.95">
-              <circle cx="3" cy="2.6" r="0.35"/><circle cx="5" cy="2.6" r="0.35"/><circle cx="7" cy="2.6" r="0.35"/><circle cx="9" cy="2.6" r="0.35"/>
-              <circle cx="4" cy="4.2" r="0.35"/><circle cx="6" cy="4.2" r="0.35"/><circle cx="8" cy="4.2" r="0.35"/><circle cx="10" cy="4.2" r="0.35"/>
-              <circle cx="3" cy="5.8" r="0.35"/><circle cx="5" cy="5.8" r="0.35"/><circle cx="7" cy="5.8" r="0.35"/><circle cx="9" cy="5.8" r="0.35"/>
-              <circle cx="4" cy="7.4" r="0.35"/><circle cx="6" cy="7.4" r="0.35"/><circle cx="8" cy="7.4" r="0.35"/><circle cx="10" cy="7.4" r="0.35"/>
-            </g>
-          </svg>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
 
-          <div class="brand">Quote Savings</div>
-        </div>
-        <div class="sub">Serving American drivers since 2002</div>
-      </header>
+      /* ===== Layout ===== */
+      .wrap {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 18px 14px 26px;
+      }
 
-      <div class="divider"></div>
+      .card {
+        width: min(420px, 100%);
+        border: 1px solid var(--cardBorder);
+        border-radius: 22px;
+        box-shadow: var(--cardShadow);
+        padding: 18px 16px 18px;
+        background: #fff;
+      }
 
-      <!-- STATUS STRIP -->
-      <div class="status" role="status" aria-live="polite">
-        <span class="dot" aria-hidden="true"></span>
-        <div class="statusText">
-          <span class="live">LIVE:</span> Limited-time savings program
-        </div>
-      </div>
+      .header {
+        display: grid;
+        justify-items: center;
+        gap: 6px;
+        padding-top: 6px;
+      }
 
-      <!-- HEADLINE -->
-      <div class="hero">
-        <div class="h1">
-          <span class="flashZoom shimmerText">Drivers may qualify to get</span>
-          <br />
-          <span class="emphGreen shimmerText">$1497</span>
-          <span> back in </span>
-          <span class="emphGreen shimmerText">30 seconds</span>
-        </div>
-        <div class="support">Rates vary by location, driving history, and current policy.</div>
-      </div>
+      .brandRow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
 
-      <div class="line"></div>
+      .flag {
+        width: 26px;
+        height: 18px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+        flex: 0 0 auto;
+      }
+      /* Simple inline “generic” flag look */
+      .flag svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
 
-      <!-- QUESTION -->
-      <div class="q">Are you currently insured?</div>
+      .brandName {
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        font-size: 18px;
+        line-height: 1.1;
+      }
+      .subBrand {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: -2px;
+      }
 
-      <!-- BUTTONS -->
-      <div class="btnWrap">
-        <button class="btn" id="yesBtn" type="button">YES</button>
-        <button class="btn secondary" id="noBtn" type="button">NO</button>
-      </div>
+      .divider {
+        height: 1px;
+        background: var(--line);
+        margin: 14px 2px 12px;
+      }
 
-      <!-- TRUST ROW -->
-      <div class="trustRow" aria-label="Trust notes">
-        <span><i class="bullet" aria-hidden="true"></i> Free check</span>
-        <span><i class="bullet" aria-hidden="true"></i> No paperwork</span>
-        <span><i class="bullet" aria-hidden="true"></i> Takes under 1 minute</span>
-      </div>
+      /* ===== Status line ===== */
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: #f8fafc;
+        border-radius: 999px;
+        padding: 10px 12px;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+        flex: 0 0 auto;
+      }
+      .statusText {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .statusText .live {
+        color: var(--green);
+      }
 
-      <!-- TESTIMONIAL -->
-      <div class="testi" aria-label="Testimonial">
-        <div class="avatar" aria-hidden="true">👤</div>
-        <div>
-          <div class="tText">
-            “Hard to believe, but they lowered my premium by $78 a month and it took no time at all.”
+      /* ===== Copy ===== */
+      .headline {
+        margin: 16px 8px 8px;
+        text-align: center;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        font-size: 28px;
+      }
+      .emph {
+        color: var(--green);
+      }
+
+      .support {
+        margin: 0 18px 14px;
+        text-align: center;
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .question {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 14px 10px 12px;
+      }
+
+      /* ===== Buttons ===== */
+      .btnStack {
+        display: grid;
+        gap: 12px;
+        padding: 0 6px;
+      }
+
+      .btn {
+        position: relative;
+        width: 100%;
+        border: 0;
+        cursor: pointer;
+        border-radius: 16px;
+        padding: 16px 14px;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #fff;
+        box-shadow: 0 10px 18px var(--redShadow);
+        transform: translateZ(0);
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      /* Red shade gradient (polished, not ugly) */
+      .btnRed {
+        background: linear-gradient(180deg, var(--redB), var(--redA));
+      }
+      .btnRed::before {
+        content: "";
+        position: absolute;
+        inset: 1px 1px auto 1px;
+        height: 52%;
+        border-radius: 15px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.18),
+          rgba(255, 255, 255, 0)
+        );
+        pointer-events: none;
+      }
+      .btnRed::after {
+        /* subtle inner edge */
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+        pointer-events: none;
+      }
+
+      .btn:active {
+        transform: translateY(1px) scale(0.995);
+        box-shadow: 0 7px 14px rgba(185, 28, 28, 0.18);
+        filter: brightness(0.98);
+      }
+
+      /* Shimmer layer (only on options) */
+      .btn .shimmer {
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .btn .shimmer::before {
+        content: "";
+        position: absolute;
+        top: -40%;
+        left: -60%;
+        width: 60%;
+        height: 180%;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.35) 45%,
+          rgba(255, 255, 255, 0) 90%
+        );
+        transform: rotate(18deg);
+        opacity: 0.0;
+      }
+
+      /* ===== Trust row ===== */
+      .trust {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 12px 8px 10px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .trust span::before {
+        content: "• ";
+        color: rgba(15, 23, 42, 0.35);
+      }
+      .trust span:first-child::before {
+        content: "";
+      }
+
+      /* ===== Testimonial ===== */
+      .testi {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 12px;
+        align-items: start;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 16px;
+        padding: 12px 12px;
+        background: #ffffff;
+        margin: 8px 6px 0;
+      }
+      .avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(15, 23, 42, 0.10);
+        background: radial-gradient(circle at 30% 30%, #eef2f7 0%, #dde3ec 55%, #cfd7e3 100%);
+      }
+      .quote {
+        font-size: 13px;
+        line-height: 1.35;
+        color: #111827;
+        font-weight: 600;
+      }
+      .who {
+        margin-top: 6px;
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 12px;
+        font-size: 11px;
+        color: #9aa3af;
+        line-height: 1.35;
+        padding: 0 10px;
+      }
+
+      /* ===== THE “FOCUS” FLOW: headline -> question -> options =====
+         Slow, focused, repeats every ~7s. */
+      .focus-headline {
+        transform-origin: center;
+        animation: focusPulse 7.2s ease-in-out infinite;
+      }
+
+      .focus-question {
+        transform-origin: center;
+        animation: focusPulse 7.2s ease-in-out infinite;
+        animation-delay: 1.7s;
+      }
+
+      /* Buttons: gentle pulse + strong shimmer sweep */
+      .focus-btn-yes {
+        animation: focusBtn 7.2s ease-in-out infinite;
+        animation-delay: 3.2s;
+      }
+      .focus-btn-no {
+        animation: focusBtn 7.2s ease-in-out infinite;
+        animation-delay: 3.55s;
+      }
+
+      /* Shimmer sweep timings aligned with focus on buttons */
+      .focus-btn-yes .shimmer::before {
+        animation: shimmerSweep 7.2s ease-in-out infinite;
+        animation-delay: 3.2s;
+      }
+      .focus-btn-no .shimmer::before {
+        animation: shimmerSweep 7.2s ease-in-out infinite;
+        animation-delay: 3.55s;
+      }
+
+      @keyframes focusPulse {
+        0%,
+        14% {
+          transform: scale(1);
+          opacity: 1;
+          filter: none;
+        }
+        22% {
+          transform: scale(1.04);
+          opacity: 1;
+          filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.08));
+        }
+        32% {
+          transform: scale(1);
+          opacity: 1;
+          filter: none;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+          filter: none;
+        }
+      }
+
+      @keyframes focusBtn {
+        0%,
+        42% {
+          transform: scale(1);
+          box-shadow: 0 10px 18px rgba(185, 28, 28, 0.18);
+        }
+        50% {
+          transform: scale(1.03);
+          box-shadow: 0 14px 26px rgba(185, 28, 28, 0.22);
+        }
+        60% {
+          transform: scale(1);
+          box-shadow: 0 10px 18px rgba(185, 28, 28, 0.18);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 10px 18px rgba(185, 28, 28, 0.18);
+        }
+      }
+
+      @keyframes shimmerSweep {
+        0%,
+        35% {
+          opacity: 0;
+          transform: translateX(-120%) rotate(18deg);
+        }
+        43% {
+          opacity: 1;
+          transform: translateX(210%) rotate(18deg);
+        }
+        50% {
+          opacity: 0;
+          transform: translateX(210%) rotate(18deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(210%) rotate(18deg);
+        }
+      }
+
+      /* ===== Responsiveness ===== */
+      @media (max-width: 360px) {
+        .headline {
+          font-size: 26px;
+        }
+        .btn {
+          padding: 15px 14px;
+        }
+      }
+
+      /* ===== Reduced motion ===== */
+      @media (prefers-reduced-motion: reduce) {
+        .focus-headline,
+        .focus-question,
+        .focus-btn-yes,
+        .focus-btn-no,
+        .focus-btn-yes .shimmer::before,
+        .focus-btn-no .shimmer::before {
+          animation: none !important;
+        }
+        .btn {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <main class="card" role="main" aria-label="Auto insurance savings quiz">
+        <!-- HEADER -->
+        <div class="header">
+          <div class="brandRow">
+            <div class="flag" aria-hidden="true">
+              <!-- Generic “flag-like” icon (not branded) -->
+              <svg viewBox="0 0 26 18" xmlns="http://www.w3.org/2000/svg">
+                <rect width="26" height="18" fill="#fff" />
+                <!-- red stripes -->
+                <rect y="0" width="26" height="2" fill="#b91c1c" />
+                <rect y="4" width="26" height="2" fill="#b91c1c" />
+                <rect y="8" width="26" height="2" fill="#b91c1c" />
+                <rect y="12" width="26" height="2" fill="#b91c1c" />
+                <rect y="16" width="26" height="2" fill="#b91c1c" />
+                <!-- blue canton -->
+                <rect x="0" y="0" width="11" height="8" fill="#1d4ed8" />
+                <!-- tiny “stars” dots -->
+                <circle cx="2.2" cy="2" r="0.5" fill="#fff" />
+                <circle cx="4.6" cy="2" r="0.5" fill="#fff" />
+                <circle cx="7" cy="2" r="0.5" fill="#fff" />
+                <circle cx="9.4" cy="2" r="0.5" fill="#fff" />
+                <circle cx="3.4" cy="4" r="0.5" fill="#fff" />
+                <circle cx="5.8" cy="4" r="0.5" fill="#fff" />
+                <circle cx="8.2" cy="4" r="0.5" fill="#fff" />
+                <circle cx="2.2" cy="6" r="0.5" fill="#fff" />
+                <circle cx="4.6" cy="6" r="0.5" fill="#fff" />
+                <circle cx="7" cy="6" r="0.5" fill="#fff" />
+                <circle cx="9.4" cy="6" r="0.5" fill="#fff" />
+              </svg>
+            </div>
+            <div class="brandName">Quote Savings</div>
           </div>
-          <div class="tMeta">— Tom G., FL</div>
+          <div class="subBrand">Serving American drivers since 2002</div>
         </div>
-      </div>
 
-      <!-- FOOTER -->
-      <div class="foot">
-        *Savings not guaranteed. Individual results vary based on insurer, location, and driving profile.
-      </div>
-    </section>
-  </main>
+        <div class="divider"></div>
 
-  <script>
-    // Demo click behavior (replace with your redirect / quiz routing)
-    const REDIRECT_URL_YES = "https://example.com/yes";
-    const REDIRECT_URL_NO  = "https://example.com/no";
+        <!-- STATUS LINE -->
+        <div class="status" aria-live="polite">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="statusText">
+            <span class="live">LIVE:</span> Limited-time savings program
+          </div>
+        </div>
 
-    function go(url){
-      // window.location.href = url; // uncomment for real use
-      console.log("Redirect to:", url);
-    }
+        <!-- HEADLINE (focus first) -->
+        <h1 class="headline focus-headline">
+          Drivers may qualify to get <span class="emph">$1497</span> back in
+          <span class="emph">30 seconds</span>
+        </h1>
 
-    document.getElementById("yesBtn").addEventListener("click", () => go(REDIRECT_URL_YES));
-    document.getElementById("noBtn").addEventListener("click",  () => go(REDIRECT_URL_NO));
+        <p class="support">
+          Rates vary by location, driving history, and current policy.
+        </p>
 
-    // Optional: keep animations “fresh” by restarting zoom-fade on interaction
-    function restartAnimation(el, className){
-      el.classList.remove(className);
-      void el.offsetWidth; // reflow
-      el.classList.add(className);
-    }
+        <div class="divider"></div>
 
-    // Add a quick zoom-fade burst on tap (matches your “zoom in fade out” request)
-    const headline = document.querySelector(".flashZoom");
-    document.getElementById("yesBtn").addEventListener("pointerdown", () => restartAnimation(headline, "flashZoom"));
-    document.getElementById("noBtn").addEventListener("pointerdown",  () => restartAnimation(headline, "flashZoom"));
-  </script>
-</body>
+        <!-- QUESTION (focus second) -->
+        <div class="question focus-question">Are you currently insured?</div>
+
+        <!-- BUTTONS (focus third) -->
+        <div class="btnStack" role="group" aria-label="Quiz options">
+          <button class="btn btnRed focus-btn-yes" id="btnYes" type="button">
+            YES
+            <span class="shimmer" aria-hidden="true"></span>
+          </button>
+          <button class="btn btnRed focus-btn-no" id="btnNo" type="button">
+            NO
+            <span class="shimmer" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="trust" aria-label="Trust information">
+          <span>Free check</span>
+          <span>No paperwork</span>
+          <span>Takes under 1 minute</span>
+        </div>
+
+        <!-- TESTIMONIAL -->
+        <section class="testi" aria-label="Testimonial">
+          <div class="avatar" aria-hidden="true"></div>
+          <div>
+            <div class="quote">
+              “Hard to believe but they lowered my premium by $78 a month — and it
+              took no time at all.”
+            </div>
+            <div class="who">— Tom G., FL</div>
+          </div>
+        </section>
+
+        <div class="footer">
+          Savings not guaranteed. Results vary by driver, state, vehicle, and insurer availability.
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // OPTIONAL: replace with your tracking/redirect links
+      const REDIRECT_YES = "https://example.com/yes";
+      const REDIRECT_NO = "https://example.com/no";
+
+      document.getElementById("btnYes").addEventListener("click", () => {
+        window.location.href = REDIRECT_YES;
+      });
+
+      document.getElementById("btnNo").addEventListener("click", () => {
+        window.location.href = REDIRECT_NO;
+      });
+    </script>
+  </body>
 </html>
